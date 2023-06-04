@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/jpashop; #MVCC=TRUE #MVCC사용하면 오류남.
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        #show_sql: true
+        format_sql : true
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+
+    #문제 : test log에서 변수가(?, ?) 이렇게보임
+    #해결1 : trace // (?, ?) 밑에 파라미터 설명해줌
+    org.hibernate.type: trace #로그찍기
+    #문제2 : ? 를 없애고싶음
+    #해결 : 외부라이브러리 P6Spy
+    #build.gradle에 implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.6' 추가.

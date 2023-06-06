@@ -28,4 +28,6 @@ public class Member {
     나는 Order클래스의 member변수의 거울이다.
      */
     private List<Order> orders = new ArrayList<>();
+
+
 }

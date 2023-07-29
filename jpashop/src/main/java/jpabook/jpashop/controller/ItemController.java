@@ -63,7 +63,7 @@ public class ItemController {
 
     @PostMapping("/items/{itemId}/edit")    //itemId는 html에서 넘어오니까 @PathValiable필요X
     //@ModelAttribue로 html에서 {form}에 해당하는 객체를 받아온다.
-    public String updateItem(@ModelAttribute("form") BookForm form) {
+    public String updateItem(@PathVariable Long itemId, @ModelAttribute("form") BookForm form) {
         Book book = new Book();
 
         //스마트하게 복붙 : edit-colum selection mode - shift, ctrl로 조정
@@ -71,14 +71,17 @@ public class ItemController {
 
         //보안취약점 : id조작가능
         //해결 : 유저가 item권한이 있는지 체크해주는 로직추가
-        book.setId(form.getId());
-        book.setName(form.getName());
-        book.setPrice(form.getPrice());
-        book.setStockQuantity(form.getStockQuantity());
-        book.setAuthor(form.getAuthor());
-        book.setIsbn(form.getIsbn());
+//        book.setId(form.getId());
+//        book.setName(form.getName());
+//        book.setPrice(form.getPrice());
+//        book.setStockQuantity(form.getStockQuantity());
+//        book.setAuthor(form.getAuthor());
+//        book.setIsbn(form.getIsbn());
+//        itemService.saveItem(book);
 
-        itemService.saveItem(book);
+        //리팩토링
+        itemService.updateItem(itemId, form.getName(),form.getPrice(), form.getStockQuantity());
+
         return "redirect:/items";   //끝나면 목록으로 ㄱㄱ
     }
 }

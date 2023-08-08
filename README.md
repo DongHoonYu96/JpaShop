@@ -10,4 +10,4 @@
 - 회원가입, 상품등록, 상품주문 기능 구현
 - 프론트엔드 제작(BootStrap)
 
-- ![ezgif.com-video-to-gif.gif](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/81abeb62-93e6-4271-b83f-451a06dede0b/ezgif.com-video-to-gif.gif)
+-![ezgif com-video-to-gif (1)](https://github.com/DongHoonYu96/JAVA_Spring/assets/50190387/bb73b84d-aaff-4fac-87b7-b4784ffb9d5d)

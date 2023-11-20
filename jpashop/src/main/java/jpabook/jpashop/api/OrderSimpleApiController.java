@@ -8,6 +8,7 @@ import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderStatus;
 import jpabook.jpashop.repository.OrderRepository;
 import jpabook.jpashop.repository.OrderSearch;
+import jpabook.jpashop.repository.OrderSimpleQueryDto;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -66,6 +67,17 @@ public class OrderSimpleApiController {
                 .collect(Collectors.toList());
 
         return result;
+    }
+
+    //JPA에서 DTO로 바로조회 => select절 필요한것만 뽑아옴 => 약간의 네트워크 성능개선
+    //단점(-) : 맞춤쿼리(repository가 api에 의존적임) => 재사용성 down
+    //v3에 비해 큰 장점이 있는것은 아님...
+    //결론 : 시간성능test 해보고 뭘쓸지 결정해라, select절이 엄청많을때 사용해봐라
+    //결론2 : v3해보고, 안되면 v4, 그래도안되면 JDBC SQL 직접사용.
+    //단점해결 : 별도의 SimpleQueryRepository 클래스를 생성 => 맞춤쿼리 담당 클래스를 따로 만듬
+    @GetMapping("/api/v4/simple-orders")
+    public List<OrderSimpleQueryDto> ordersV4() {
+        return orderRepository.findOrderDtos();
     }
 
     @Data

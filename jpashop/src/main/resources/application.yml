@@ -7,11 +7,11 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: none #table data 드랍하지마 => 영구사용
     properties:
       hibernate:
         #show_sql: true
-        format_sql : true
+        format_sql: true
 
 logging:
   level:

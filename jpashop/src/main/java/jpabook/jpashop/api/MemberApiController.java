@@ -1,5 +1,6 @@
 package jpabook.jpashop.api;
 
+import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import jpabook.jpashop.domain.Member;
@@ -7,6 +8,7 @@ import jpabook.jpashop.service.MemberService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -18,6 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class MemberApiController {
 
     private final MemberService memberService;
+
+    @GetMapping("api/v1/members")
+    public List<Member> membersV1() {
+        return memberService.findMembers();
+    }
+    
 
     @PostMapping("/api/v1/members")
     public CreateMemberResponse saveMemberV1(

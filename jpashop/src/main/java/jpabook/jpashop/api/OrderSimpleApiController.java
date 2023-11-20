@@ -1,9 +1,14 @@
 package jpabook.jpashop.api;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
+import jpabook.jpashop.domain.Address;
 import jpabook.jpashop.domain.Order;
+import jpabook.jpashop.domain.OrderStatus;
 import jpabook.jpashop.repository.OrderRepository;
 import jpabook.jpashop.repository.OrderSearch;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,5 +38,38 @@ public class OrderSimpleApiController {
             order.getDelivery().getAddress();   //Lazy 강제초기화
         }
         return all;
+    }
+
+    //문제 : 1 + N 문제
+    //1(주문목록조회쿼리) + 2(주문목록2개에 대해 스트림 반복문2회)
+    //주문목록[1] : 멤버1회 조회 + 배송1회 조회
+    //주문목록[2] : 멤버1회 조회 + 배송1회 조회
+    //결과 : 1 + 2 + 2 //O(5)
+    //해결 : 패치조인(version3)
+    @GetMapping("/api/v2/simple-orders")
+    public List<SimpleOrderDto> ordersV2() {
+        List<Order> orders = orderRepository.findAllByString(new OrderSearch());
+        List<SimpleOrderDto> result = orders.stream() //스트림으로 바꾸기
+                .map(o -> new SimpleOrderDto(o))//order를 Dto로 바꾸기
+                .collect(Collectors.toList()); //리스트로바꾸기
+
+        return result;
+    }
+
+    @Data
+    static class SimpleOrderDto {
+        private Long orderId;
+        private String name;
+        private LocalDateTime orderDate;
+        private OrderStatus orderStatus;
+        private Address address;
+
+        public SimpleOrderDto(Order order) {
+            orderId = order.getId();
+            name = order.getMember().getName(); //LAZY 초기화(영속성컨텍스트에없음 -> db쿼리날림)
+            orderDate = order.getOrderDate();
+            orderStatus = order.getStatus();
+            address = order.getDelivery().getAddress(); //LAZY 초기화(영속성컨텍스트에없음 -> db쿼리날림)
+        }
     }
 }

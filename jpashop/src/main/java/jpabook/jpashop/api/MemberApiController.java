@@ -1,6 +1,7 @@
 package jpabook.jpashop.api;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import jpabook.jpashop.domain.Member;
@@ -25,7 +26,35 @@ public class MemberApiController {
     public List<Member> membersV1() {
         return memberService.findMembers();
     }
-    
+
+    //배열리턴X, DTO 리턴 => 변수추가등 확장성 up
+    //API 필요한정보(name)만 노출 => 보안 up
+    @GetMapping("api/v2/members")
+    public Result membersV2() {
+        List<Member> findMembers = memberService.findMembers();
+        //1.memberList 를 stream 돌리기
+        //2.member엔티티(m)에서 이름꺼내서 Dto에 넣기
+        //3.맵 =>조건에맞는 스트림으로 바꿔치기
+        //4.리스트로 바꾸기
+        List<MemberDto> collect = findMembers.stream()
+                .map(m -> new MemberDto(m.getName()))
+                .collect(Collectors.toList());
+
+        return new Result(collect.size(), collect);
+    }
+
+    @Data
+    @AllArgsConstructor
+    private static class Result<T> {
+        private int count;
+        private T data;
+    }
+
+    @Data
+    @AllArgsConstructor
+    static class MemberDto {
+        private String name;
+    }
 
     @PostMapping("/api/v1/members")
     public CreateMemberResponse saveMemberV1(
@@ -86,4 +115,6 @@ public class MemberApiController {
         private Long id;
         private String name;
     }
+
+
 }

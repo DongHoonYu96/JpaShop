@@ -7,7 +7,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: none #table data 드랍하지마 => 영구사용
+      ddl-auto: create #none : table data 드랍하지마 => 영구사용 #create : 실행할때마다 테이블드랍후 새로만듬
     properties:
       hibernate:
         #show_sql: true

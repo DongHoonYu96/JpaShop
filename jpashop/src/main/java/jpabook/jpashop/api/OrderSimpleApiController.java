@@ -56,6 +56,18 @@ public class OrderSimpleApiController {
         return result;
     }
 
+    //패치조인 : 한번에 필요한거 다떙겨오는 함수구현&&jpa sql작성 => 1+N 문제 해결
+    @GetMapping("/api/v3/simple-orders")
+    public List<SimpleOrderDto> ordersV3() {
+        List<Order> orders = orderRepository.findAllWithMemberDelivery();
+
+        List<SimpleOrderDto> result = orders.stream()
+                .map(o -> new SimpleOrderDto(o))
+                .collect(Collectors.toList());
+
+        return result;
+    }
+
     @Data
     static class SimpleOrderDto {
         private Long orderId;

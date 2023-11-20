@@ -1,16 +1,20 @@
 package jpabook.jpashop.repository;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.domain.Order;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
-
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
@@ -62,9 +66,7 @@ public class OrderRepository {
     }
 
     /**
-     * 문제 : 동적쿼리?
-     * JPA Criteria로 해결하는법
-     * 단점:무슨쿼리생성될지 파악어려움 => 유지보수 망
+     * 문제 : 동적쿼리? JPA Criteria로 해결하는법 단점:무슨쿼리생성될지 파악어려움 => 유지보수 망
      */
     public List<Order> findAllByCriteria(OrderSearch orderSearch) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -89,6 +91,15 @@ public class OrderRepository {
         cq.where(cb.and(criteria.toArray(new Predicate[criteria.size()])));
         TypedQuery<Order> query = em.createQuery(cq).setMaxResults(1000); //최대1000건
         return query.getResultList();
+    }
+
+    //패치조인 : 한번에 필요한거 다떙겨오기
+    public List<Order> findAllWithMemberDelivery() {
+        return em.createQuery(
+                "select o from Order o" +
+                        " join fetch o.member m" +  //앞에한칸 띄워야함 키포인트!
+                        " join fetch o.delivery d", Order.class
+        ).getResultList();
     }
 
     //쿼리dsl

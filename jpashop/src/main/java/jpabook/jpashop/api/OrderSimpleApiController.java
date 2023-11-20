@@ -9,6 +9,7 @@ import jpabook.jpashop.domain.OrderStatus;
 import jpabook.jpashop.repository.OrderRepository;
 import jpabook.jpashop.repository.OrderSearch;
 import jpabook.jpashop.repository.OrderSimpleQueryDto;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -59,14 +60,14 @@ public class OrderSimpleApiController {
 
     //패치조인 : 한번에 필요한거 다떙겨오는 함수구현&&jpa sql작성 => 1+N 문제 해결
     @GetMapping("/api/v3/simple-orders")
-    public List<SimpleOrderDto> ordersV3() {
+    public Result ordersV3() {
         List<Order> orders = orderRepository.findAllWithMemberDelivery();
 
-        List<SimpleOrderDto> result = orders.stream()
+        List<SimpleOrderDto> collect = orders.stream()
                 .map(o -> new SimpleOrderDto(o))
                 .collect(Collectors.toList());
 
-        return result;
+        return new Result(collect.size(), collect);
     }
 
     //JPA에서 DTO로 바로조회 => select절 필요한것만 뽑아옴 => 약간의 네트워크 성능개선
@@ -78,6 +79,13 @@ public class OrderSimpleApiController {
     @GetMapping("/api/v4/simple-orders")
     public List<OrderSimpleQueryDto> ordersV4() {
         return orderRepository.findOrderDtos();
+    }
+
+    @Data
+    @AllArgsConstructor
+    private static class Result<T> {
+        private int count;
+        private T data;
     }
 
     @Data

@@ -38,10 +38,10 @@ public class OrderApiController {
     @GetMapping("/api/v2/orders")
     public List<OrderDto> ordersV2() {
         List<Order> orders = orderRepository.findAllByString(new OrderSearch());
-        List<OrderDto> collect = orders.stream()
+        List<OrderDto> result = orders.stream()
                 .map(o -> new OrderDto(o))
                 .collect(Collectors.toList());
-        return collect;
+        return result;
     }
 
     @Data   //no properties 오류해결 : @Getter(@Data) 만들어주기
@@ -52,7 +52,7 @@ public class OrderApiController {
         private LocalDateTime localDateTime;
         private OrderStatus orderStatus;
         private Address address;
-        private List<OrderItem> orderItems;
+        private List<OrderItemDto> orderItems;
 
         public OrderDto(Order order) {
             this.orderId = order.getId();
@@ -60,14 +60,32 @@ public class OrderApiController {
             this.localDateTime = order.getOrderDate();
             this.orderStatus = order.getStatus();
             this.address = order.getDelivery().getAddress();
-            order.getOrderItems().stream().forEach(o -> o.getItem().getName()); //LAZY 엔티티라서 null -> 강제초기화
-            this.orderItems = order.getOrderItems();
+            this.orderItems = order.getOrderItems().stream()
+                    .map(orderItem -> new OrderItemDto(orderItem))
+                    .collect(Collectors.toList());
             //단점 : 결국 외부에 엔티티 의존성이 높음, orderItem수정시 api 스펙이 다바뀜
             //       Dto한번 감싸는것만으로 안됨
-            //해결 : orderItem을 orderItemDto로 바꿔야함
+            //해결 : 엔티티를 엔티티 Dto로 바꿔야함 / orderItem을 orderItemDto로 바꿔야함
         }
     }
 
+    @Data   //no properties 오류해결 : @Getter(@Data) 만들어주기
+    static class OrderItemDto {
+
+        //필드에는 딱 필요한것만 정의!
+        private String itemName;
+        private int orderPrice;
+        private int count;
+
+        public OrderItemDto(OrderItem orderItem) {
+            this.itemName = orderItem.getItem().getName();
+            this.orderPrice = orderItem.getOrderPrice();
+            this.count = orderItem.getCount();
+        }
+    }
+    //문제 : SQL실행횟수 너무많음
+    //      order1번 * member,address(N번) * orderItem N번 * item N번(책의갯수만큼..)
+    //해결 : 패치조인?
 
 }
 

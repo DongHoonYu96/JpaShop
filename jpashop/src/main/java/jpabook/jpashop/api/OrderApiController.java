@@ -44,6 +44,19 @@ public class OrderApiController {
         return result;
     }
 
+    //패치조인
+    //문제 : 1대 다 조인 => 같은order가 2회씩 총4번 조회됨(중복조회)
+    //해결 : distinct sql삽입 (같은엔티티 조회 -> 중복걸러줌)
+    //패치조인의 단점 : 페이징 불가
+    @GetMapping("/api/v3/orders")
+    public List<OrderDto> ordersV3() {
+        List<Order> orders = orderRepository.findAllWithItem();
+        List<OrderDto> result = orders.stream()
+                .map(o -> new OrderDto(o))
+                .collect(Collectors.toList());
+        return result;
+    }
+
     @Data   //no properties 오류해결 : @Getter(@Data) 만들어주기
     static class OrderDto {
 

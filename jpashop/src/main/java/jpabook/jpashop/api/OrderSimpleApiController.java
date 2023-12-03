@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  * <p>
  * Order Order -> Member  / Order - >(연관관계) Delivery
  */
-@RestController //data를 바로 json,xml으로 보냄
+@RestController
 @RequiredArgsConstructor
 public class OrderSimpleApiController {
 

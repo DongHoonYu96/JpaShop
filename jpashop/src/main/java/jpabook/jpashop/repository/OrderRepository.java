@@ -96,10 +96,23 @@ public class OrderRepository {
     //패치조인 : 한번에 필요한거 다떙겨오기
     public List<Order> findAllWithMemberDelivery() {
         return em.createQuery(
-                "select o from Order o" +
-                        " join fetch o.member m" +  //앞에한칸 띄워야함 키포인트!
-                        " join fetch o.delivery d", Order.class
-        ).getResultList();
+                        "select o from Order o" +
+                                " join fetch o.member m" +  //앞에한칸 띄워야함 키포인트!
+                                " join fetch o.delivery d", Order.class
+                )
+                .getResultList();
+    }
+
+    //패치조인 : 한번에 필요한거 다떙겨오기
+    public List<Order> findAllWithMemberDelivery(int offset, int limit) {
+        return em.createQuery(
+                        "select o from Order o" +
+                                " join fetch o.member m" +  //앞에한칸 띄워야함 키포인트!
+                                " join fetch o.delivery d", Order.class
+                )
+                .setFirstResult(offset) //시작인덱스
+                .setMaxResults(limit) //페이지갯수
+                .getResultList();
     }
 
     public List<OrderSimpleQueryDto> findOrderDtos() {

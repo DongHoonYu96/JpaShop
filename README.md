@@ -18,6 +18,3 @@
 
 ![db2](https://github.com/DongHoonYu96/JAVA_Spring/assets/50190387/889f556c-0e3a-4ffb-817f-ccc485f92235)
 
-**강의수강**
-
--인프런 김영한님의 "실전! 스프링 부트와 JPA 활용1 - 웹 애플리케이션 개발" 을 보고 만들었습니다.

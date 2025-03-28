@@ -24,6 +24,5 @@ public class ItemUpdateTest {
         //트랜젝션안에서
         book.setName("asdfghf");
         //set이후 트랜잭션 커밋하면 스프링이 자동으로 DB에 반영해줌 == 변경감지
-
     }
 }

@@ -33,9 +33,6 @@ public class Member {
     거울쪽에 mappedBy를 적어준다.
     나는 Order클래스의 member변수의 거울이다.
      */
-
     @JsonIgnore //api 요청시 반환안함!
     private List<Order> orders = new ArrayList<>();
-
-
 }

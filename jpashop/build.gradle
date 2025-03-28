@@ -30,6 +30,7 @@ dependencies {
     //리빌드 만으로 수정반영, 재시작필요X
 
     compileOnly 'org.projectlombok:lombok'
+    runtimeOnly 'com.mysql:mysql-connector-j'
     runtimeOnly 'com.h2database:h2'
 
     annotationProcessor 'org.projectlombok:lombok'

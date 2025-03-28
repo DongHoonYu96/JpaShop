@@ -9,8 +9,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)    //JUnit 실행할때 스프링이랑 같이 실행해줘
@@ -46,7 +44,6 @@ public class MemberServiceTest {
         //when
         memberService.join(member1);
         memberService.join(member2);    //예외가 발생해야한다.
-
 
         //then
         fail("예외가 발생해야 한다.");   //여기줄까지 오면안됨

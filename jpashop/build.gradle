@@ -25,11 +25,13 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.6'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate5'
+    implementation 'com.springframework.boot:spring-boot-starter-aop'
 
     //implementation 'org.springframework.boot:spring-boot-devtools'
     //리빌드 만으로 수정반영, 재시작필요X
 
     compileOnly 'org.projectlombok:lombok'
+    implementation 'org.springframework.boot:spring-boot-devtools' //view 수정시 자동 반영
     runtimeOnly 'com.mysql:mysql-connector-j'
     runtimeOnly 'com.h2database:h2'
 

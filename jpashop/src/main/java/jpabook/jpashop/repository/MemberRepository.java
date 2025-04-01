@@ -17,7 +17,7 @@ public class MemberRepository {
     private final EntityManager em;
 
     public void save(Member member){
-        em.persist(member); //JPA야 저장해줘.
+        em.persist(member);
     }
 
     public Member findOne(Long id){
@@ -27,7 +27,6 @@ public class MemberRepository {
 
     public List<Member> findAll(){
         return em.createQuery("select m from Member m",Member.class).getResultList();
-                                                            //(쿼리,반환타입)를 리스트로만들어줘
     }
 
     public List<Member> findByName(String name){

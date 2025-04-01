@@ -9,10 +9,12 @@ import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderItem;
 import jpabook.jpashop.domain.item.Book;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-@Component  //콤포넌트 스캔 대상이됨
+@Component
+@Profile("!test")  //테스트환경이 아닐때만 실행
 @RequiredArgsConstructor
 public class InitDb {
 

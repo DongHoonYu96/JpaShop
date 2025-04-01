@@ -9,12 +9,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import lombok.Getter;
-import lombok.Setter;
+
+import lombok.*;
 
 @Entity //Member 테이블 만들어줘.
 @Getter
 @Setter
+@NoArgsConstructor
 public class Member {
 
     @Id //Long id를 키로 해줘.
@@ -35,4 +36,10 @@ public class Member {
      */
     @JsonIgnore //api 요청시 반환안함!
     private List<Order> orders = new ArrayList<>();
+
+    @Builder
+    public Member(String name, Address address) {
+        this.name = name;
+        this.address = address;
+    }
 }

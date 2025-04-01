@@ -1,11 +1,13 @@
 package jpabook.jpashop.domain;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import javax.persistence.Embeddable;
 
 @Embeddable //내장가능
 @Getter
+@EqualsAndHashCode
 public class Address {
 
     private String city;

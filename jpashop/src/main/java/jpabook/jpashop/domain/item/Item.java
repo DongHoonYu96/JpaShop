@@ -20,27 +20,18 @@ public abstract class Item {
     @Column(name="item_id")
     private Long id;
 
-    private  String name;
-    private  int price;
+    private String name;
+    private int price;
     private int stockQuantity;
 
     @ManyToMany(mappedBy = "items")
     private List<Category> categories = new ArrayList<>();
 
     //==비즈니스 로직==//
-
-    /**
-     * 재고증가
-     * @param quantity
-     */
     public void addStock(int quantity){
         this.stockQuantity+=quantity;
     }
 
-    /**
-     * 재고 줄이기
-     * @param quatity
-     */
     public void removeStock(int quatity){
         int restStock = this.stockQuantity - quatity;
         if(restStock<0){

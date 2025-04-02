@@ -58,11 +58,11 @@ public class InitDb {
         }
 
         private static Book createBook(String name, int price, int stockQuantity) {
-            Book book1 = new Book();
-            book1.setName(name);
-            book1.setPrice(price);
-            book1.setStockQuantity(stockQuantity);
-            return book1;
+            return Book.builder().
+                    name(name).
+                    price(price).
+                    stockQuantity(stockQuantity).
+                    build();
         }
 
         public void dbInit2() {

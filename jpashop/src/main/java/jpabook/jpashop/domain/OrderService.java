@@ -6,14 +6,18 @@ import jpabook.jpashop.repository.MemberRepository;
 import jpabook.jpashop.repository.OrderRepository;
 import jpabook.jpashop.repository.OrderSearch;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import java.util.List;
 
 @Service
-@Transactional(readOnly = true)
+@Transactional(readOnly = false)
 @RequiredArgsConstructor
+@Slf4j
 public class OrderService {
 
     private final OrderRepository orderRepository;
@@ -23,11 +27,18 @@ public class OrderService {
     /**
      * 주문
      */
-    @Transactional
+    @Transactional(readOnly = false)
     public Long order(Long memberId, Long itemId, int count){
+        boolean isActive = TransactionSynchronizationManager.isActualTransactionActive();
+        log.info("Actual class: {}", this.getClass());
+        log.info("[{}] Transaction Active: {}", Thread.currentThread().getName(), isActive);
         //엔티티 조회
         Member member=memberRepository.findOne(memberId);
         Item item=itemRepository.findOne(itemId);
+
+        // 주문 전의 엔티티 상태 로깅
+        log.info("Before Order - Item ID: {}, Stock: {}", item.getId(), item.getStockQuantity());
+//        log.info("kkkkkkkkkkkkkkkkkkkkkkkk");
 
         //배송정보 생성
         Delivery delivery=new Delivery();
@@ -35,6 +46,7 @@ public class OrderService {
 
         //주문상품 생성
         OrderItem orderItem=OrderItem.createOrderItem(item,item.getPrice(),count);
+//        itemRepository.save(item);
 
         //주문 생성
         /*
@@ -53,8 +65,10 @@ public class OrderService {
         문제2 : delivery, orderitem을 여러군데서 사용하는경우?
         해결 : 별도의 repository => 각각 persist
          */
-        orderRepository.save(order);
-
+//        orderRepository.save(order);
+        orderRepository.saveAndFlush(order);
+        // 주문 저장 후 엔티티 상태 로깅 (flush 전)
+        log.info("After Order Save - Item ID: {}, Stock: {}", item.getId(), item.getStockQuantity());
         return order.getId();
     }
 

@@ -43,7 +43,6 @@ public class OrderItem {
 
         item.removeStock(count);    //재고갱신
         return orderItem;
-
     }
 
     //==비즈니스 로직==//
@@ -52,12 +51,6 @@ public class OrderItem {
     }
 
     //==조회 로직==//
-
-    /**
-     * 주문상품 전체 가격조회
-     *
-     * @return
-     */
     public int getTotalPrice() {
         return getOrderPrice() * getCount();
     }

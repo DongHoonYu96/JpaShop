@@ -26,6 +26,11 @@ public class OrderRepository {
         em.persist(order);
     }
 
+    public void saveAndFlush(Order order) {
+        em.persist(order);
+        em.flush();
+    }
+
     public Order findOne(Long id) {
         return em.find(Order.class, id);
     }

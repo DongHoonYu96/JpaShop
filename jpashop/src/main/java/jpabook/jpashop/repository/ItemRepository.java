@@ -3,8 +3,10 @@ package jpabook.jpashop.repository;
 import jpabook.jpashop.domain.item.Item;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 import java.util.List;
 
 @Repository
@@ -22,8 +24,10 @@ public class ItemRepository {
         }
     }
 
+//    @Transactional(readOnly = false)
     public Item findOne(Long id){
-        return em.find(Item.class,id);
+        return em.find(Item.class, id, LockModeType.PESSIMISTIC_WRITE);
+//        return em.find(Item.class,id);
     }
 
     public List<Item> findAll(){

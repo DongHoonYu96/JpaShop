@@ -2,10 +2,14 @@ package jpabook.jpashop.domain.item;
 
 import jpabook.jpashop.domain.Category;
 import jpabook.jpashop.exception.NotEnoughStockException;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,10 +17,12 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)   //상속전략 : 한 테이블에 다때려박기
 @DiscriminatorColumn(name="dtype")  //자식구분자
 @Getter @Setter
+@SuperBuilder
+@NoArgsConstructor
 public abstract class Item {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="item_id")
     private Long id;
 
@@ -24,15 +30,24 @@ public abstract class Item {
     private int price;
     private int stockQuantity;
 
+//    @Version // 낙관적 락을 위한 버전 필드
+//    private Long version;
+
     @ManyToMany(mappedBy = "items")
     private List<Category> categories = new ArrayList<>();
+
+    protected Item(String name , int price, int stockQuantity){
+        this.name=name;
+        this.price=price;
+        this.stockQuantity=stockQuantity;
+    }
 
     //==비즈니스 로직==//
     public void addStock(int quantity){
         this.stockQuantity+=quantity;
     }
 
-    public void removeStock(int quatity){
+    public synchronized void removeStock(int quatity){
         int restStock = this.stockQuantity - quatity;
         if(restStock<0){
             throw new NotEnoughStockException("need more stock");

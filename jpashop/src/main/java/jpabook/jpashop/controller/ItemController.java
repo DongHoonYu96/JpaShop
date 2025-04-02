@@ -27,12 +27,13 @@ public class ItemController {
 
     @PostMapping("/items/new")  //html에서 Post받으면 이함수실행
     public String create(BookForm form) {
-        Book book = new Book();
-        book.setName(form.getName());
-        book.setPrice(form.getPrice());
-        book.setStockQuantity(form.getStockQuantity());
-        book.setAuthor(form.getAuthor());
-        book.setIsbn(form.getIsbn());
+        Book book = Book.builder()
+                .name(form.getName())
+                .price(form.getPrice())
+                .stockQuantity(form.getStockQuantity())
+                .author(form.getAuthor())
+                .isbn(form.getIsbn())
+                .build();
 
         itemService.saveItem(book);
         return "redirect:/"; //끝나면 홈화면으로 가라
@@ -64,7 +65,7 @@ public class ItemController {
     @PostMapping("/items/{itemId}/edit")    //itemId는 html에서 넘어오니까 @PathValiable필요X
     //@ModelAttribue로 html에서 {form}에 해당하는 객체를 받아온다.
     public String updateItem(@PathVariable Long itemId, @ModelAttribute("form") BookForm form) {
-        Book book = new Book();
+//        Book book = new Book();
 
         //스마트하게 복붙 : edit-colum selection mode - shift, ctrl로 조정
         //shift+ctrl+u => 대문자로

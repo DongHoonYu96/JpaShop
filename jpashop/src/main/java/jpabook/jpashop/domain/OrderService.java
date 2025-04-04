@@ -15,7 +15,6 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
 import java.util.List;
 
 @Service
-@Transactional(readOnly = false)
 @RequiredArgsConstructor
 @Slf4j
 public class OrderService {
@@ -24,9 +23,6 @@ public class OrderService {
     private final MemberRepository memberRepository;
     private final ItemRepository itemRepository;
 
-    /**
-     * 주문
-     */
     @Transactional(readOnly = false)
     public Long order(Long memberId, Long itemId, int count){
         boolean isActive = TransactionSynchronizationManager.isActualTransactionActive();
@@ -38,7 +34,6 @@ public class OrderService {
 
         // 주문 전의 엔티티 상태 로깅
         log.info("Before Order - Item ID: {}, Stock: {}", item.getId(), item.getStockQuantity());
-//        log.info("kkkkkkkkkkkkkkkkkkkkkkkk");
 
         //배송정보 생성
         Delivery delivery=new Delivery();
@@ -65,8 +60,9 @@ public class OrderService {
         문제2 : delivery, orderitem을 여러군데서 사용하는경우?
         해결 : 별도의 repository => 각각 persist
          */
-//        orderRepository.save(order);
-        orderRepository.saveAndFlush(order);
+
+//        orderRepository.saveAndFlush(order);
+        orderRepository.save(order);
         // 주문 저장 후 엔티티 상태 로깅 (flush 전)
         log.info("After Order Save - Item ID: {}, Stock: {}", item.getId(), item.getStockQuantity());
         return order.getId();

@@ -45,36 +45,35 @@ public class OrderServiceConcurrencyTest {
     TestDataService testDataService; // 별도 서비스 주입
 
     @Test
-    @DisplayName("10명이 5개씩 주문하면 재고가 50이 줄어야 한다.")
+    @DisplayName("n명이 k개씩 주문하면 재고가 n*k개 줄어야 한다.")
     public void stock_decrease_concurrency() throws Exception {
-        // given - 데이터 설정을 위한 서비스 호출 (트랜잭션 적용됨)
-        TestDataDto testData = testDataService.createTestData(100);
+        // given
+        int stockQuantity = 100;
+        TestDataDto testData = testDataService.createTestData(stockQuantity);
         Long bookId = testData.getBookId();
         Long memberId = testData.getMemberId();
         
-        log.info("초기 설정 완료 - 도서 ID: {}, 회원 ID: {}", bookId, memberId);
-        
-        int orderCount = 1;
-        int threadCount = 100;
+        int orderCount = 5;
+        int threadCount = 10;
         ExecutorService executorService = Executors.newFixedThreadPool(100);
         CountDownLatch latch = new CountDownLatch(threadCount);
 
-        // when
+        // when - 주문 요청
         for(int i=0; i<threadCount; i++){
             executorService.submit(() -> {
                 try {
                     orderService.order(memberId, bookId, orderCount);
-                } finally {
-                    latch.countDown();
+                } catch (Exception e) {
+                    log.error("주문 실패 : {}", e.getMessage());
                 }
+                latch.countDown();
             });
         }
-
         latch.await();
         executorService.shutdown();
 
-        // then - 결과 확인을 위한 메소드 호출 (트랜잭션 적용됨)
-        testDataService.verifyFinalStock(bookId, 0);
+        // then - 최종 재고 확인
+        testDataService.verifyFinalStock(bookId, stockQuantity - orderCount * threadCount);
     }
 }
 

@@ -24,10 +24,8 @@ public class ItemRepository {
         }
     }
 
-//    @Transactional(readOnly = false)
     public Item findOne(Long id){
         return em.find(Item.class, id, LockModeType.PESSIMISTIC_WRITE);
-//        return em.find(Item.class,id);
     }
 
     public List<Item> findAll(){

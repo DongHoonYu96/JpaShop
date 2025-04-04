@@ -30,9 +30,6 @@ public abstract class Item {
     private int price;
     private int stockQuantity;
 
-//    @Version // 낙관적 락을 위한 버전 필드
-//    private Long version;
-
     @ManyToMany(mappedBy = "items")
     private List<Category> categories = new ArrayList<>();
 
@@ -47,7 +44,7 @@ public abstract class Item {
         this.stockQuantity+=quantity;
     }
 
-    public synchronized void removeStock(int quatity){
+    public void removeStock(int quatity){
         int restStock = this.stockQuantity - quatity;
         if(restStock<0){
             throw new NotEnoughStockException("need more stock");

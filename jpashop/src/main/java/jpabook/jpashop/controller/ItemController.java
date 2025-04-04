@@ -4,8 +4,11 @@ import jpabook.jpashop.domain.item.Book;
 import jpabook.jpashop.domain.item.Item;
 import jpabook.jpashop.service.ItemService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class ItemController {
@@ -25,8 +29,10 @@ public class ItemController {
         return "items/createItemForm";  //해당 html로 이동
     }
 
-    @PostMapping("/items/new")  //html에서 Post받으면 이함수실행
-    public String create(BookForm form) {
+    @PostMapping("/items/new")
+    public String create(
+            @Validated @ModelAttribute("form")BookForm form, //html에서 넘어온 form을 BookForm으로 바꿔서 받음
+            BindingResult bindingResult) {
         Book book = Book.builder()
                 .name(form.getName())
                 .price(form.getPrice())
@@ -34,6 +40,11 @@ public class ItemController {
                 .author(form.getAuthor())
                 .isbn(form.getIsbn())
                 .build();
+
+        if(bindingResult.hasErrors()) {
+            log.info("errors={}", bindingResult);
+            return "items/createItemForm";  //다시 html로 이동
+        }
 
         itemService.saveItem(book);
         return "redirect:/"; //끝나면 홈화면으로 가라

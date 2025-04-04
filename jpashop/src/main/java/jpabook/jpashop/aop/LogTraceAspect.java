@@ -16,7 +16,7 @@ public class LogTraceAspect {
         this.logTrace = logTrace;
     }
 
-    @Around("execution(* jpabook.jpashop.service..*(..)) || execution(* jpabook.jpashop.repository..*(..))")
+    @Around("execution(* jpabook.jpashop.controller..*(..)) || execution(* jpabook.jpashop.service..*(..)) || execution(* jpabook.jpashop.repository..*(..))")
     public Object execute(ProceedingJoinPoint joinPoint) throws Throwable {
         TraceStatus status = null;
         try{

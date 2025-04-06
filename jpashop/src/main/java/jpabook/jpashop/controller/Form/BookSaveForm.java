@@ -1,4 +1,4 @@
-package jpabook.jpashop.controller;
+package jpabook.jpashop.controller.Form;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,9 +7,7 @@ import org.hibernate.validator.constraints.Range;
 import javax.validation.constraints.NotBlank;
 
 @Getter @Setter
-public class BookForm {
-
-    private Long id;
+public class BookSaveForm {
 
     @NotBlank(message = "상품명은 필수입니다.")
     private String name;

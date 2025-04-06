@@ -1,4 +1,4 @@
-package jpabook.jpashop.controller;
+package jpabook.jpashop.controller.Form;
 
 import lombok.Getter;
 import lombok.Setter;

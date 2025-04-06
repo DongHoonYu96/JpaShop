@@ -1,5 +1,8 @@
 package jpabook.jpashop.controller;
 
+import jpabook.jpashop.controller.Form.BookForm;
+import jpabook.jpashop.controller.Form.BookSaveForm;
+import jpabook.jpashop.controller.Form.BookUpdateForm;
 import jpabook.jpashop.domain.item.Book;
 import jpabook.jpashop.domain.item.Item;
 import jpabook.jpashop.service.ItemService;
@@ -25,13 +28,13 @@ public class ItemController {
 
     @GetMapping("/items/new")   //이주소를 치면 이 함수실행
     public String createForm(Model model) {
-        model.addAttribute("form", new BookForm());  //html로 이동시 이거들고가
+        model.addAttribute("form", new BookSaveForm());  //html로 이동시 이거들고가
         return "items/createItemForm";  //해당 html로 이동
     }
 
     @PostMapping("/items/new")
     public String create(
-            @Validated @ModelAttribute("form")BookForm form, //html에서 넘어온 form을 BookForm으로 바꿔서 받음
+            @Validated @ModelAttribute("form")BookSaveForm form, //html에서 넘어온 form을 BookForm으로 바꿔서 받음
             BindingResult bindingResult) {
         Book book = Book.builder()
                 .name(form.getName())
@@ -75,7 +78,10 @@ public class ItemController {
 
     @PostMapping("/items/{itemId}/edit")    //itemId는 html에서 넘어오니까 @PathValiable필요X
     //@ModelAttribue로 html에서 {form}에 해당하는 객체를 받아온다.
-    public String updateItem(@PathVariable Long itemId, @ModelAttribute("form") BookForm form) {
+    public String updateItem(
+            @PathVariable Long itemId,
+            @Validated @ModelAttribute("form") BookUpdateForm form,
+            BindingResult bindingResult) {
 //        Book book = new Book();
 
         //스마트하게 복붙 : edit-colum selection mode - shift, ctrl로 조정
@@ -91,6 +97,10 @@ public class ItemController {
 //        book.setIsbn(form.getIsbn());
 //        itemService.saveItem(book);
 
+        if(bindingResult.hasErrors()) {
+            log.info("errors={}", bindingResult);
+            return "items/updateItemForm";  //다시 html로 이동
+        }
         //리팩토링
         itemService.updateItem(itemId, form.getName(),form.getPrice(), form.getStockQuantity());
 

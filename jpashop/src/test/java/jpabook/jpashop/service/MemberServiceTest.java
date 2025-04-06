@@ -12,7 +12,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.Assert.*;
 
 @ActiveProfiles("test")
 @RunWith(SpringRunner.class)    //JUnit 실행할때 스프링이랑 같이 실행해줘
@@ -39,10 +38,10 @@ public class MemberServiceTest {
     public void 중복_회원_예외() throws Exception{
         //given
         Member member1=new Member();
-        member1.setName("kim");
+        member1.setLoginId("kim");
 
         Member member2=new Member();
-        member2.setName("kim");
+        member2.setLoginId("kim");
 
         //when
         memberService.join(member1);

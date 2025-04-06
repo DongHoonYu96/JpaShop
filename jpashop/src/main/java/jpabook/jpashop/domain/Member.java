@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 import lombok.*;
 
@@ -23,6 +24,13 @@ public class Member {
     @Column(name = "member_id") //테이블 컬럼명 이걸로해줘. (기본값:변수이름)
     private Long id;
 
+    @NotNull
+    private String loginId;
+
+    @NotNull
+    private String password;
+
+    @NotNull
     private String name;
 
     @Embedded //내장타입임.

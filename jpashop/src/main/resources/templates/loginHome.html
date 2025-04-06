@@ -8,11 +8,11 @@
 <div class="container">
     <div th:replace="fragments/bodyHeader :: bodyHeader" />
     <div class="jumbotron">
-        <h1>HELLO SHOP</h1>
+        <h2 th:text="|${member.name} 님 안녕하세요!|"></h2>
         <p class="lead">회원 기능</p>
         <p>
-            <a class="btn btn-lg btn-secondary" href="/members/new">회원 가입</a>
-            <a class="btn btn-lg btn-secondary" href="/login">로그인</a>
+            <a class="btn btn-lg btn-secondary" href="/members">회원 목록</a>
+            <a class="btn btn-lg btn-secondary" href="/login/logout">로그 아웃</a>
         </p>
         <p class="lead">상품 기능</p>
         <p>

@@ -2,6 +2,7 @@ package jpabook.jpashop;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
+
 import jpabook.jpashop.domain.Address;
 import jpabook.jpashop.domain.Delivery;
 import jpabook.jpashop.domain.Member;
@@ -24,6 +25,7 @@ public class InitDb {
     public void init() {
         initService.dbInit1();
         initService.dbInit2();
+        initService.dbInit3();
     }
 
     @Component
@@ -34,7 +36,7 @@ public class InitDb {
         private final EntityManager em;
 
         public void dbInit1() {
-            Member member = createMember("userA", "서울", "1", "1111");
+            Member member = createMember("bisu", "123456", "userA", "서울", "1", "1111");
             em.persist(member);
 
             Book book1 = createBook("JPA1 BOOK", 10000, 100);
@@ -66,7 +68,7 @@ public class InitDb {
         }
 
         public void dbInit2() {
-            Member member = createMember("userB", "진주", "2", "2222");
+            Member member = createMember("bingsu", "123456", "userB", "진주", "2", "2222");
             em.persist(member);
 
             Book book1 = createBook("SPRING BOOK", 20000, 200);
@@ -83,12 +85,20 @@ public class InitDb {
             em.persist(order);
         }
 
-        private static Member createMember(String name, String city, String street, String zipcode) {
+        public void dbInit3() {
+            Member member = createMember("admin", "admin", "admin", "진주", "2", "2222");
+            em.persist(member);
+        }
+
+        private static Member createMember(String loginId, String password, String name, String city, String street, String zipcode) {
             Member member = new Member();
+            member.setLoginId(loginId);
+            member.setPassword(password);
             member.setName(name);
             member.setAddress(new Address(city, street, zipcode));
             return member;
         }
+
 
     }
 }

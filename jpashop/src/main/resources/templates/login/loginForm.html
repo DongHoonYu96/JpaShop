@@ -8,7 +8,6 @@
         .container {
             max-width: 560px;
         }
-
         .field-error {
             border-color: #dc3545;
             color: #dc3545;
@@ -27,34 +26,43 @@
         </div>
         <div>
             <label for="loginId">로그인 ID</label>
-            <input type="text" id="loginId" th:field="*{loginId}" class="form-control" placeholder="admin"
-                   th:errorclass="field-error">
-            <div class="field-error" th:errors="*{loginId}">
+            <input type="text" id="loginId" th:field="*{loginId}" class="form-control" th:errorclass="field-error">
+            <div class="field-error" th:errors="*{loginId}"></div>
         </div>
         <div>
             <label for="password">비밀번호</label>
-            <input type="password" id="password" th:field="*{password}"
-                   class="form-control"
-                   placeholder="admin"
-                   th:errorclass="field-error">
-            <div class="field-error" th:errors="*{password}">
+            <input type="password" id="password" th:field="*{password}" class="form-control" th:errorclass="field-error">
+            <div class="field-error" th:errors="*{password}"></div>
         </div>
-
         <hr class="my-4">
         <div class="row">
             <div class="col">
-                <button class="w-100 btn btn-primary btn-lg" type="submit">로그인
-                </button>
+                <button class="w-100 btn btn-primary btn-lg" type="submit">로그인</button>
             </div>
             <div class="col">
                 <button class="w-100 btn btn-secondary btn-lg"
                         onclick="location.href='items.html'"
                         th:onclick="|location.href='@{/}'|"
-                        type="button">취소
-                </button>
+                        type="button">취소</button>
+            </div>
+        </div>
+        <!-- 체험하기 버튼 추가 -->
+        <div class="row mt-3">
+            <div class="col">
+                <button class="w-100 btn btn-info btn-lg" type="button" onclick="trialLogin()">체험하기</button>
             </div>
         </div>
     </form>
 </div> <!-- /container -->
+
+<script>
+  function trialLogin() {
+    // 입력 필드에 기본값 채우기
+    document.getElementById("loginId").value = "admin";
+    document.getElementById("password").value = "admin!";
+    // 폼 제출
+    document.querySelector("form").submit();
+  }
+</script>
 </body>
 </html>

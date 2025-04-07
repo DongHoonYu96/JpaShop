@@ -86,7 +86,7 @@ public class InitDb {
         }
 
         public void dbInit3() {
-            Member member = createMember("admin", "admin", "admin", "진주", "2", "2222");
+            Member member = createMember("admin", "admin!", "admin", "진주", "2", "2222");
             em.persist(member);
         }
 

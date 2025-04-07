@@ -9,19 +9,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 @Controller
-@Slf4j  //로그찍기위해
+@Slf4j
 public class HomeController {
 
-    @RequestMapping("/")    //기본화면으로 매핑해라
+    @RequestMapping("/")
     public String home(
             @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember,
-            Model model) {
+            Model model
+            ) {
 
-        if (loginMember == null) {  //로그인 안한사람
-            return "home";  //home.html 열어라
+        if (loginMember == null) {
+            return "home";
         }
 
-        model.addAttribute("member", loginMember);  //로그인한사람
+        model.addAttribute("member", loginMember);
         return "loginHome";
     }
 }

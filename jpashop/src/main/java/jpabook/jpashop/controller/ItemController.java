@@ -26,7 +26,7 @@ public class ItemController {
 
     private final ItemService itemService;
 
-    @GetMapping("/items/new")   //이주소를 치면 이 함수실행
+    @GetMapping("/items/new")
     public String createForm(Model model) {
         model.addAttribute("form", new BookSaveForm());  //html로 이동시 이거들고가
         return "items/createItemForm";  //해당 html로 이동

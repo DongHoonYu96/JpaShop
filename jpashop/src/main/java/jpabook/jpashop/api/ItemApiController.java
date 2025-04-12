@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,20 +24,22 @@ public class ItemApiController {
 
     @PostMapping("/create")
     public Object create(
-            @Validated @RequestBody BookSaveForm form,
-            BindingResult bindingResult
+            @Validated @RequestBody BookSaveForm form
     ) {
-
-        if(bindingResult.hasErrors()) {
-            log.info("errors={}", bindingResult);
-            return bindingResult.getAllErrors();
-        }
-
         Item book = makeItemFrom(form);
 
         itemService.saveItem(book);
 
         return form;
+    }
+
+    @GetMapping()
+    public Object findAll() {
+        List<Item> items = itemService.findItems();
+        List<SimpleItemDto> collect = items.stream().
+                map(SimpleItemDto::new).
+                collect(Collectors.toList());
+        return new Result<>(collect.size(), collect);
     }
 
     private Item makeItemFrom(BookSaveForm form) {
@@ -49,15 +50,6 @@ public class ItemApiController {
                 .author(form.getAuthor())
                 .isbn(form.getIsbn())
                 .build();
-    }
-
-    @GetMapping()
-    public Object findAll() {
-        List<Item> items = itemService.findItems();
-        List<SimpleItemDto> collect = items.stream().
-                map(item -> new SimpleItemDto(item)).
-                collect(Collectors.toList());
-        return new Result<>(collect.size(), collect);
     }
 
     @Data

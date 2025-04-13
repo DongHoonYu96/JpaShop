@@ -28,7 +28,12 @@ public class ItemRepository {
         return em.find(Item.class, id, LockModeType.PESSIMISTIC_WRITE);
     }
 
-    public List<Item> findAll(){
+    public List<Item> findAll() {
+        try {
+            Thread.sleep(1000); // 1초 대기
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return em.createQuery("select i from Item i",Item.class)
                 .getResultList();
     }

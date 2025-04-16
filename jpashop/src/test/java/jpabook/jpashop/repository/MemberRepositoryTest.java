@@ -64,11 +64,11 @@ class MemberRepositoryTest {
 
         //then
         assertThat(findMembers).hasSize(3)
-                .extracting("name", "address")
-                .containsExactlyInAnyOrder(
-                        tuple("member1", new Address("seoul", "gannam", "123456")),
-                        tuple("member2", new Address("busan", "mafo", "456789")),
-                        tuple("member3", new Address("gwangju", "suwan", "987654"))
-                );
+            .extracting("name", "address")
+            .containsExactlyInAnyOrder(
+                    tuple("member1", new Address("seoul", "gannam", "123456")),
+                    tuple("member2", new Address("busan", "mafo", "456789")),
+                    tuple("member3", new Address("gwangju", "suwan", "987654"))
+            );
     }
 }

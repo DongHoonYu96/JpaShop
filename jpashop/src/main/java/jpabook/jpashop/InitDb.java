@@ -31,7 +31,7 @@ public class InitDb {
     @Component
     @Transactional
     @RequiredArgsConstructor
-    static class InitService {
+    public static class InitService {
 
         private final EntityManager em;
 
@@ -53,13 +53,13 @@ public class InitDb {
             em.persist(order);
         }
 
-        private static Delivery createDelivery(Member member) {
+        public static Delivery createDelivery(Member member) {
             Delivery delivery = new Delivery();
             delivery.setAddress(member.getAddress());
             return delivery;
         }
 
-        private static Book createBook(String name, int price, int stockQuantity) {
+        public static Book createBook(String name, int price, int stockQuantity) {
             return Book.builder().
                     name(name).
                     price(price).
@@ -90,7 +90,7 @@ public class InitDb {
             em.persist(member);
         }
 
-        private static Member createMember(String loginId, String password, String name, String city, String street, String zipcode) {
+        public static Member createMember(String loginId, String password, String name, String city, String street, String zipcode) {
             Member member = new Member();
             member.setLoginId(loginId);
             member.setPassword(password);

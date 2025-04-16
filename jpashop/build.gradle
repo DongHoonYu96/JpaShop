@@ -27,9 +27,14 @@ dependencies {
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate5'
     implementation 'org.springframework.boot:spring-boot-starter-aop'
 
+    //Querydsl 추가
+    implementation 'com.querydsl:querydsl-jpa'
+    annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa"
+    annotationProcessor "jakarta.annotation:jakarta.annotation-api"
+    annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+
     //implementation 'org.springframework.boot:spring-boot-devtools'
     //리빌드 만으로 수정반영, 재시작필요X
-
     compileOnly 'org.projectlombok:lombok'
     implementation 'org.springframework.boot:spring-boot-devtools' //view 수정시 자동 반영
     runtimeOnly 'com.mysql:mysql-connector-j'
@@ -48,5 +53,9 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
+//Querydsl 추가, 자동 생성된 Q클래스 gradle clean으로 제거
+clean {
+    delete file('src/main/generated')
+}
 
 

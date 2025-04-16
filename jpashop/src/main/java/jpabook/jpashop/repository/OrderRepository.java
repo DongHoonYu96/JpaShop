@@ -10,17 +10,29 @@ import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.domain.Order;
+import jpabook.jpashop.domain.OrderStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
+import static jpabook.jpashop.domain.QMember.member;
+import static jpabook.jpashop.domain.QOrder.order;
+
 @Repository
-@RequiredArgsConstructor
 public class OrderRepository {
 
     private final EntityManager em;
+    private final JPAQueryFactory query;
+
+    public OrderRepository(EntityManager em) {
+        this.em = em;
+        this.query = new JPAQueryFactory(em);
+    }
 
     public void save(Order order) {
         em.persist(order);
@@ -33,6 +45,18 @@ public class OrderRepository {
 
     public Order findOne(Long id) {
         return em.find(Order.class, id);
+    }
+
+    //쿼리dsl
+    public List<Order> findAllByQueryDsl(OrderSearch orderSearch){
+        return query
+                .select(order)
+                .from(order)
+                .join(order.member, member)
+                .where(statusEq(orderSearch.getOrderStatus()),
+                        nameLike(orderSearch.getMemberName()))
+                .limit(1000)
+                .fetch();
     }
 
     public List<Order> findAllByString(OrderSearch orderSearch) {
@@ -140,22 +164,6 @@ public class OrderRepository {
                 .getResultList();
     }
 
-    //쿼리dsl
-    /*public List<Order> findAll(OrderSearch orderSearch){
-
-        Order order=QOrder.order;
-        QMember member=Qmember.member;
-
-        return query
-                .select(order)
-                .from(order)
-                .join(order.member, member)
-                .where(statusEq(order.getOrderStatus()),
-                        nameLike(orderSearch.getMemberName()))
-                .limit(1000)
-                .fetch();
-    }
-
     private BooleanExpression statusEq(OrderStatus statusCond){
         if(statusCond==null){
             return null;
@@ -168,5 +176,5 @@ public class OrderRepository {
             return null;
         }
         return member.name.like(nameCond);
-    }*/
+    }
 }

@@ -57,11 +57,9 @@ public class OrderController {
         //model.addAttribute("orderSearch",orderSearch);    //@ModelATtribute => 자동으로 모델에 담아줌. 받기도가능
 
         return "order/orderList";
-
-
     }
 
-    @PostMapping(value="orders/{orderId}/cancel") //PathVAriable에서 받아온거 {}에 대입.
+    @PostMapping(value="orders/{orderId}/cancel")
     public String cancelOrder(@PathVariable("orderId") Long orderId){
         orderService.cancleOrder(orderId);
 

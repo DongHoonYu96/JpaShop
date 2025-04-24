@@ -15,7 +15,7 @@ public class ItemService {
 
     private final ItemRepository itemRepository;
 
-    @Transactional  //readOnly=false => 수정할꺼임.
+    @Transactional
     public void saveItem(Item item){
         itemRepository.save(item);
     }
@@ -33,8 +33,8 @@ public class ItemService {
         return itemRepository.findAll();
     }
 
+    @Transactional
     public Item findOne(Long itemId){
         return itemRepository.findOne(itemId);
     }
-
 }

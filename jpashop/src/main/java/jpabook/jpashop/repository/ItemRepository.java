@@ -11,10 +11,12 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
+@Transactional(readOnly = true) //읽기전용 트랜잭션
 public class ItemRepository {
 
     private final EntityManager em;
 
+    @Transactional
     public void save(Item item){
         if(item.getId()==null){
             em.persist(item);   //아이디가없으면(새로생성된객체), 아이템 저장
@@ -24,6 +26,7 @@ public class ItemRepository {
         }
     }
 
+    @Transactional(readOnly = false)
     public Item findOne(Long id){
         return em.find(Item.class, id, LockModeType.PESSIMISTIC_WRITE);
     }

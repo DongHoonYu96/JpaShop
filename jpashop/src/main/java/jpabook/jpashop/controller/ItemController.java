@@ -72,7 +72,7 @@ public class ItemController {
         form.setAuthor(item.getAuthor());
         form.setIsbn(item.getIsbn());
 
-        model.addAttribute("form", form);    //return의 html로 이동시 이거들고가
+        model.addAttribute("form", form);
         return "items/updateItemForm";
     }
 

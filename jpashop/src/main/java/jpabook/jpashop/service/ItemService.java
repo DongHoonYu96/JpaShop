@@ -29,8 +29,20 @@ public class ItemService {
         findItem.setStockQuantity(stockQuantity);
     }
 
-    public List<Item> findItems(){
+    public List<Item> findItems() {
         return itemRepository.findAll();
+    }
+
+    public List<Item> findItems(Long itemId, int pageSize) {
+        return itemRepository.findAllByQueryDsl(itemId, pageSize);
+    }
+
+    public List<Item> findItems(int pageNum) {
+        return itemRepository.findAllByQueryDsl(pageNum);
+    }
+
+    public List<Item> findItemsKeySet(int pageNum) {
+        return itemRepository.findAllByQueryDslWithIdsAndInClause(pageNum);
     }
 
     @Transactional

@@ -28,6 +28,26 @@
       </tr>
       </tbody>
     </table>
+
+    <!-- No-Offset 페이징 (더보기 버튼만) -->
+    <div class="d-flex justify-content-center mt-3">
+      <div th:if="${items == null or items.isEmpty()}">
+        <a th:href="@{/items(itemId=10, pageSize=${pageSize})}"
+           class="btn btn-outline-primary">이전페이지
+        </a>
+      </div>
+      <div th:if="${items != null and !items.isEmpty()}">
+        <a th:href="@{/items(itemId=${lastItemId+2*pageSize}, pageSize=${pageSize})}"
+           class="btn btn-outline-primary">이전페이지
+        </a>
+      </div>
+      <!-- 더보기 버튼 (다음 데이터가 있을 때만 표시) -->
+      <div th:if="${items != null and !items.isEmpty()}">
+        <a th:href="@{/items(itemId=${lastItemId}, pageSize=${pageSize})}"
+           class="btn btn-outline-primary">다음페이지
+        </a>
+      </div>
+    </div>
   </div>
   <div th:replace="fragments/footer :: footer"/>
 </div> <!-- /container -->

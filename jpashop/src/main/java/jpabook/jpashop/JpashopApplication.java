@@ -1,7 +1,6 @@
 package jpabook.jpashop;
 
 import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
-import jpabook.jpashop.aop.Trace.FieldLogTrace;
 import jpabook.jpashop.aop.Trace.LogTrace;
 import jpabook.jpashop.aop.Trace.ThreadLocalLogTrace;
 import jpabook.jpashop.config.AopConfig;

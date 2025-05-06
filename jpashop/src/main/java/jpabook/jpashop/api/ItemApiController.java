@@ -33,9 +33,29 @@ public class ItemApiController {
         return form;
     }
 
+//    @GetMapping()
+//    public Object findAll() {
+//        List<Item> items = itemService.findItems();
+//        List<SimpleItemDto> collect = items.stream().
+//                map(SimpleItemDto::new).
+//                collect(Collectors.toList());
+//        return new Result<>(collect.size(), collect);
+//    }
+
     @GetMapping()
-    public Object findAll() {
-        List<Item> items = itemService.findItems();
+    public Object findAllWithPaging(
+                          @RequestParam(value = "pageNum", defaultValue = "0") int pageNum) {
+        List<Item> items = itemService.findItems(pageNum);
+        List<SimpleItemDto> collect = items.stream().
+                map(SimpleItemDto::new).
+                collect(Collectors.toList());
+        return new Result<>(collect.size(), collect);
+    }
+
+    @GetMapping("/v2")
+    public Object findAllWithPagingV2(
+            @RequestParam(value = "pageNum", defaultValue = "0") int pageNum) {
+        List<Item> items = itemService.findItemsKeySet(pageNum);
         List<SimpleItemDto> collect = items.stream().
                 map(SimpleItemDto::new).
                 collect(Collectors.toList());

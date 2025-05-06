@@ -21,7 +21,7 @@ public class InitDb {
 
     private final InitService initService;
 
-    @PostConstruct  //스프링빈이 올라온 후 (의존성 주입 후) 실행해줘
+//    @PostConstruct  //스프링빈이 올라온 후 (의존성 주입 후) 실행해줘
     public void init() {
         initService.dbInit1();
         initService.dbInit2();

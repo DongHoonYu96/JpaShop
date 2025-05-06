@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.util.List;
 
 @Configuration
-@Profile("!local") //로컬 환경에서는 적용하지 않음
+//@Profile("!local") //로컬 환경에서는 적용하지 않음
 public class WebConfig implements WebMvcConfigurer {
 
     @Override

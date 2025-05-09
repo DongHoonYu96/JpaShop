@@ -11,6 +11,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import static jpabook.jpashop.InitDb.InitService.createMember;
 import static org.assertj.core.api.Assertions.*;
 
 @ActiveProfiles("test")
@@ -37,18 +38,16 @@ public class MemberServiceTest {
     @Test(expected = IllegalStateException.class)
     public void 중복_회원_예외() throws Exception{
         //given
-        Member member1=new Member();
-        member1.setLoginId("kim");
+        Member member1=createMember("admin", "admin!", "admin", "진주", "2", "2222");
 
-        Member member2=new Member();
-        member2.setLoginId("kim");
+        Member member2=createMember("admin", "admin!", "admin", "진주", "2", "2222");
 
         //when
         memberService.join(member1);
-        memberService.join(member2);    //예외가 발생해야한다.
+        memberService.join(member2);
 
         //then
-        Assertions.fail("예외가 발생해야 한다.");
+        fail("예외가 발생해야 한다.");
     }
 
     @Test

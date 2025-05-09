@@ -15,7 +15,7 @@ import javax.transaction.Transactional;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 
-@ActiveProfiles("local")
+@ActiveProfiles("test")
 @SpringBootTest
 //@Transactional
 class ItemRepositoryTest {

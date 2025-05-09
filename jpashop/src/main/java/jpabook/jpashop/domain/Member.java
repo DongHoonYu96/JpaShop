@@ -46,8 +46,10 @@ public class Member {
     private List<Order> orders = new ArrayList<>();
 
     @Builder
-    public Member(String name, Address address) {
+    public Member(String name, Address address, String loginId, String password) {
         this.name = name;
         this.address = address;
+        this.loginId = loginId;
+        this.password = password;
     }
 }

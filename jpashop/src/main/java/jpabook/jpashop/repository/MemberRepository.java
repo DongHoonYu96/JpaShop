@@ -9,11 +9,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-@Repository //component scan => 자동으로 스프링빈으로 등록해줘
+@Repository
 @RequiredArgsConstructor
 public class MemberRepository {
 
-    //@PersistenceContext //EntityManager만들어서 주입해줘
     private final EntityManager em;
 
     public void save(Member member){
@@ -21,7 +20,7 @@ public class MemberRepository {
     }
 
     public Member findOne(Long id){
-        Member member = em.find(Member.class, id);  //(클래스, id(키))주면 알아서 JPA가 찾아줌
+        Member member = em.find(Member.class, id);
         return member;
     }
 

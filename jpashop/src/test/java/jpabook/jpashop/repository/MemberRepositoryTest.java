@@ -43,16 +43,22 @@ class MemberRepositoryTest {
         Member member1 = Member.builder()
                 .name("member1")
                 .address(new Address("seoul", "gannam", "123456"))
+                .loginId("userA")
+                .password("1234")
                 .build();
 
         Member member2 = Member.builder()
                 .name("member2")
                 .address(new Address("busan", "mafo", "456789"))
+                .loginId("userB")
+                .password("1234")
                 .build();
 
         Member member3 = Member.builder()
                 .name("member3")
                 .address(new Address("gwangju", "suwan", "987654"))
+                .loginId("userC")
+                .password("1234")
                 .build();
 
         memberRepository.save(member1);

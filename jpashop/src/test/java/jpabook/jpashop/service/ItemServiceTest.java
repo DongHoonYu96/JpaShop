@@ -19,7 +19,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
-@ActiveProfiles("local")
+@ActiveProfiles("test")
 public class ItemServiceTest {
 
     @Autowired
@@ -37,11 +37,11 @@ public class ItemServiceTest {
     public void updateItemTest(){
         Book book = createItem();
 
-        book.setName("asdfghf");
+        book.setName("JPA Version 2");
         itemService.updateItem(book.getId(), book.getName(), book.getPrice(), book.getStockQuantity());
 
         Book findBook = (Book) itemRepository.findOne(book.getId());
-        assertThat(findBook.getName()).isEqualTo("asdfghf");
+        assertThat(findBook.getName()).isEqualTo("JPA Version 2");
     }
 
     private Book createItem() {

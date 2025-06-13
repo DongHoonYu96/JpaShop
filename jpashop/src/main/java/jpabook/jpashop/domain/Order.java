@@ -3,27 +3,20 @@ package jpabook.jpashop.domain;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+
+import jpabook.jpashop.domain.common.Money;
+import jpabook.jpashop.domain.common.jpa.MoneyConverter;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "orders")   //테이블이름 이걸로해줘 (기본값:클래스명)
+@Table(name = "orders")
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED) //기본생성자 protected로 막아버림. 생성메서드로만 생성하도록
 public class Order {
 
     @Id
@@ -32,7 +25,7 @@ public class Order {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY) //Order클래스입장에서 맴버는 1개임. Order(Many) : member(One)
-    @JoinColumn(name = "member_id")   //조인(매핑) 이걸로해줘
+    @JoinColumn(name = "member_id")
     private Member member;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
@@ -42,7 +35,11 @@ public class Order {
     @JoinColumn(name = "delivery_id")
     private Delivery delivery;
 
-    private LocalDateTime orderDate;    //자바클래스임, 주문시간
+    @Convert(converter = MoneyConverter.class)
+    @Column(name = "total_amounts")
+    private Money totalAmounts;
+
+    private LocalDateTime orderDate;
 
     private OrderStatus status; //주문상태 [ORDER, CANCEL]
 
@@ -98,9 +95,8 @@ public class Order {
 
     //==조회 로직==//
     public int getTotalPrice() {
-        return orderItems.stream()
-                .mapToInt(OrderItem::getTotalPrice)
-                .sum();
+        return new Money(orderItems.stream()
+                .mapToInt(x -> x.getAmounts().getValue()).sum()).getValue();
     }
 
 }

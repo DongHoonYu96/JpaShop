@@ -103,7 +103,7 @@ public class OrderApiController {
         }
     }
 
-    @Data   //no properties 오류해결 : @Getter(@Data) 만들어주기
+    @Data
     static class OrderItemDto {
 
         //필드에는 딱 필요한것만 정의!
@@ -113,8 +113,8 @@ public class OrderApiController {
 
         public OrderItemDto(OrderItem orderItem) {
             this.itemName = orderItem.getItem().getName();
-            this.orderPrice = orderItem.getOrderPrice();
-            this.count = orderItem.getCount();
+            this.orderPrice = orderItem.getPrice().getValue();
+            this.count = orderItem.getQuantity();
         }
     }
     //문제 : SQL실행횟수 너무많음

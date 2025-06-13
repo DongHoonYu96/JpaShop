@@ -27,13 +27,8 @@ public class OrderService {
 
     @Transactional(readOnly = false)
     public Long order(Long memberId, Long itemId, int count){
-        boolean isActive = TransactionSynchronizationManager.isActualTransactionActive();
-        //엔티티 조회
         Member member=memberRepository.findOne(memberId);
         Item item=itemRepository.findOne(itemId);
-
-        // 주문 전의 엔티티 상태 로깅
-        log.info("Before Order - Item ID: {}, Stock: {}", item.getId(), item.getStockQuantity());
 
         //배송정보 생성
         Delivery delivery=new Delivery();
@@ -41,7 +36,6 @@ public class OrderService {
 
         //주문상품 생성
         OrderItem orderItem=OrderItem.createOrderItem(item,item.getPrice(),count);
-//        itemRepository.save(item);
 
         //주문 생성
         /*
@@ -61,31 +55,17 @@ public class OrderService {
         해결 : 별도의 repository => 각각 persist
          */
 
-//        orderRepository.saveAndFlush(order);
         orderRepository.save(order);
-        // 주문 저장 후 엔티티 상태 로깅 (flush 전)
-        log.info("After Order Save - Item ID: {}, Stock: {}", item.getId(), item.getStockQuantity());
+
         return order.getId();
     }
 
-    /**
-     * 주문 취소
-     */
     @Transactional
     public void cancleOrder(Long orderId){
-        //주문 엔티티 조회
         Order order=orderRepository.findOne(orderId);
-        //주문 취소
         order.cancel();
-        /*
-        문제 : JPA안쓰면, 실제 stock 을 바꾸는 update SQL 짜야함
-        해결 : JPA사용시, 변수바꾸는것만으로 알아서 해줌(dirty check)
-         */
     }
 
-    /**
-     * 검색
-     */
     public List<Order> findOrders(OrderSearch orderSearch){
         return orderRepository.findAllByQueryDsl(orderSearch);
     }

@@ -32,7 +32,7 @@ public class Delivery {
     private Address address;
 
     @Enumerated(EnumType.STRING)
-    private DeliveryStatus status; //READY, COMP(배송중)
+    private DeliveryStatus status;
 
     public void startShipping() {
         this.status = DeliveryStatus.SHIPPING;

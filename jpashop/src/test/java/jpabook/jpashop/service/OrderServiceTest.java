@@ -34,7 +34,7 @@ public class OrderServiceTest {
     OrderRepository orderRepository;
 
     @Test
-    public void 상품주문() throws Exception{
+    public void 상품주문() {
         //given
         Member member = createMember();
 
@@ -56,7 +56,7 @@ public class OrderServiceTest {
     }
 
     @Test
-    public void 주문취소() throws Exception{
+    public void 주문취소(){
         //given
         Member member=createMember();
         Book item = createBook("시골 JPA", 10000, 10);
@@ -78,7 +78,7 @@ public class OrderServiceTest {
     //이 예외가 터져야한다.
     @Test(expected = NotEnoughStockException.class)
     @DisplayName("재고를 초과하여 주문하는 경우 예외가 발생해야 한다.")
-    public void 상품주문_재고수량초과() throws Exception{
+    public void 상품주문_재고수량초과(){
         //given
         Member member=createMember();
         Item item = createBook("시골 JPA",10000,10);
@@ -89,7 +89,7 @@ public class OrderServiceTest {
         orderService.order(member.getId(),item.getId(),orderCount);
 
         //then
-        fail("여기로 오면 안됨. 재고부족예외가 터져야한다.");
+        fail("재고부족예외가 터져야한다.");
     }
 
     @Test(expected = IllegalStateException.class)
@@ -106,7 +106,7 @@ public class OrderServiceTest {
         order.getDelivery().startShipping();
         order.cancel();
 
-        fail("여기로 오면 안됨. 배송중인 주문은 취소할 수 없으므로 예외가 발생해야 한다.");
+        fail("배송중인 주문은 취소할 수 없으므로 예외가 발생해야 한다.");
     }
 
     private Book createBook(String name, int price, int stockQuantity) {

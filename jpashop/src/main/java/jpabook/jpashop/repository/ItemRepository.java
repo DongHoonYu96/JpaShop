@@ -97,5 +97,4 @@ public class ItemRepository {
                 .orderBy(item.id.desc())
                 .fetch();
     }
-
 }

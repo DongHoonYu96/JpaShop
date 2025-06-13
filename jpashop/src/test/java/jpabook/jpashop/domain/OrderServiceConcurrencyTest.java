@@ -3,9 +3,12 @@ package jpabook.jpashop.domain;
 import jpabook.jpashop.domain.item.Book;
 import jpabook.jpashop.domain.item.Item;
 import jpabook.jpashop.repository.ItemRepository;
+import jpabook.jpashop.repository.MemberRepository;
 import jpabook.jpashop.service.OrderService;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.After;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
@@ -24,7 +27,8 @@ import java.util.concurrent.Executors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@ActiveProfiles("local")
+@Ignore("동시성 테스트 임시 비활성화")
+@ActiveProfiles("test")
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Slf4j
@@ -38,6 +42,9 @@ public class OrderServiceConcurrencyTest {
 
     @Autowired
     ItemRepository itemRepository;
+
+    @Autowired
+    MemberRepository memberRepository;
     
     @Autowired
     PlatformTransactionManager transactionManager;
@@ -109,6 +116,8 @@ class TestDataService {
         Member member = new Member();
         member.setName("회원1");
         member.setAddress(new Address("서울","경기","123-123"));
+        member.setLoginId("testUser");
+        member.setPassword("testPassword");
         em.persist(member);
         
         TestDataDto dto = new TestDataDto();

@@ -52,4 +52,15 @@ public class Member {
         this.loginId = loginId;
         this.password = password;
     }
+
+    @Override
+    public String toString() {
+        return "Member{" +
+                "id=" + id +
+                ", loginId='" + loginId + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", address=" + address +
+                '}';
+    }
 }

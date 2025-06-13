@@ -77,15 +77,10 @@ public class Order {
 
     //==비즈니스 로직==//
 
-    /**
-     * 주문 취소
-     */
     public void cancel() {
-        if (delivery.getStatus() == DeliveryStatus.COMP) {
+        if (delivery.getStatus() == DeliveryStatus.COMPLETE) {
             throw new IllegalStateException("이미 배송완료된 상품은 취소가 불가능합니다.");
         }
-
-        //else
         this.setStatus(OrderStatus.CANCEL);
         for (OrderItem orderItem : orderItems) {
             orderItem.cancel();
@@ -93,20 +88,10 @@ public class Order {
     }
 
     //==조회 로직==//
-
-    /**
-     * 전체 주문 가격 조회
-     *
-     * @return
-     */
     public int getTotalPrice() {
-        int totalPrice = 0;
-        for (OrderItem orderItem : orderItems) {
-            totalPrice += orderItem.getTotalPrice();
-        }
-        return totalPrice;
-
-        //람다 => 깔끔하게 할수있음.
+        return orderItems.stream()
+                .mapToInt(OrderItem::getTotalPrice)
+                .sum();
     }
 
 }

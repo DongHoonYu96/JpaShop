@@ -7,7 +7,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,7 +32,6 @@ public class ItemServiceTest {
 
     @Test
     @DisplayName("상품이름 수정시 변경된 값이 반영되어야 한다.")
-    @Commit
     public void updateItemTest(){
         Book book = createItem();
 

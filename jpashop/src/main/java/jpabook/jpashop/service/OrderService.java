@@ -90,6 +90,5 @@ public class OrderService {
      */
     public List<Order> findOrders(OrderSearch orderSearch){
         return orderRepository.findAllByQueryDsl(orderSearch);
-//        return orderRepository.findAllByString(orderSearch);
     }
 }

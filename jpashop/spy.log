@@ -30,3 +30,123 @@
 1746791206104|0|statement|connection 15|url jdbc:h2:mem:77591ee5-bd4a-4426-87d2-fea60e682c74|drop table if exists order_item CASCADE |drop table if exists order_item CASCADE 
 1746791206105|0|statement|connection 15|url jdbc:h2:mem:77591ee5-bd4a-4426-87d2-fea60e682c74|drop table if exists orders CASCADE |drop table if exists orders CASCADE 
 1746791206106|0|statement|connection 15|url jdbc:h2:mem:77591ee5-bd4a-4426-87d2-fea60e682c74|drop sequence if exists hibernate_sequence|drop sequence if exists hibernate_sequence
+1749790216134|5|statement|connection 31|url jdbc:h2:mem:6c7862d9-56f8-4a58-976a-5ab583818400|drop table if exists category CASCADE |drop table if exists category CASCADE 
+1749790216141|1|statement|connection 31|url jdbc:h2:mem:6c7862d9-56f8-4a58-976a-5ab583818400|drop table if exists category_item CASCADE |drop table if exists category_item CASCADE 
+1749790216142|0|statement|connection 31|url jdbc:h2:mem:6c7862d9-56f8-4a58-976a-5ab583818400|drop table if exists delivery CASCADE |drop table if exists delivery CASCADE 
+1749790216143|1|statement|connection 31|url jdbc:h2:mem:6c7862d9-56f8-4a58-976a-5ab583818400|drop table if exists item CASCADE |drop table if exists item CASCADE 
+1749790216144|0|statement|connection 31|url jdbc:h2:mem:6c7862d9-56f8-4a58-976a-5ab583818400|drop table if exists member CASCADE |drop table if exists member CASCADE 
+1749790216145|0|statement|connection 31|url jdbc:h2:mem:6c7862d9-56f8-4a58-976a-5ab583818400|drop table if exists order_item CASCADE |drop table if exists order_item CASCADE 
+1749790216148|3|statement|connection 31|url jdbc:h2:mem:6c7862d9-56f8-4a58-976a-5ab583818400|drop table if exists orders CASCADE |drop table if exists orders CASCADE 
+1749790216149|0|statement|connection 31|url jdbc:h2:mem:6c7862d9-56f8-4a58-976a-5ab583818400|drop sequence if exists hibernate_sequence|drop sequence if exists hibernate_sequence
+1749790905546|3|statement|connection 27|url jdbc:h2:mem:bfea065d-c3a1-45a9-a1b9-7ba30739766f|drop table if exists category CASCADE |drop table if exists category CASCADE 
+1749790905548|1|statement|connection 27|url jdbc:h2:mem:bfea065d-c3a1-45a9-a1b9-7ba30739766f|drop table if exists category_item CASCADE |drop table if exists category_item CASCADE 
+1749790905549|0|statement|connection 27|url jdbc:h2:mem:bfea065d-c3a1-45a9-a1b9-7ba30739766f|drop table if exists delivery CASCADE |drop table if exists delivery CASCADE 
+1749790905550|0|statement|connection 27|url jdbc:h2:mem:bfea065d-c3a1-45a9-a1b9-7ba30739766f|drop table if exists item CASCADE |drop table if exists item CASCADE 
+1749790905551|0|statement|connection 27|url jdbc:h2:mem:bfea065d-c3a1-45a9-a1b9-7ba30739766f|drop table if exists member CASCADE |drop table if exists member CASCADE 
+1749790905559|6|statement|connection 27|url jdbc:h2:mem:bfea065d-c3a1-45a9-a1b9-7ba30739766f|drop table if exists order_item CASCADE |drop table if exists order_item CASCADE 
+1749790905560|0|statement|connection 27|url jdbc:h2:mem:bfea065d-c3a1-45a9-a1b9-7ba30739766f|drop table if exists orders CASCADE |drop table if exists orders CASCADE 
+1749790905560|0|statement|connection 27|url jdbc:h2:mem:bfea065d-c3a1-45a9-a1b9-7ba30739766f|drop sequence if exists hibernate_sequence|drop sequence if exists hibernate_sequence
+1749791736563|3|statement|connection 35|url jdbc:h2:mem:a4231463-9ce9-43a3-8864-65dee9065050|drop table if exists category CASCADE |drop table if exists category CASCADE 
+1749791736564|0|statement|connection 35|url jdbc:h2:mem:a4231463-9ce9-43a3-8864-65dee9065050|drop table if exists category_item CASCADE |drop table if exists category_item CASCADE 
+1749791736566|0|statement|connection 35|url jdbc:h2:mem:a4231463-9ce9-43a3-8864-65dee9065050|drop table if exists delivery CASCADE |drop table if exists delivery CASCADE 
+1749791736568|1|statement|connection 35|url jdbc:h2:mem:a4231463-9ce9-43a3-8864-65dee9065050|drop table if exists item CASCADE |drop table if exists item CASCADE 
+1749791736575|7|statement|connection 35|url jdbc:h2:mem:a4231463-9ce9-43a3-8864-65dee9065050|drop table if exists member CASCADE |drop table if exists member CASCADE 
+1749791736578|2|statement|connection 35|url jdbc:h2:mem:a4231463-9ce9-43a3-8864-65dee9065050|drop table if exists order_item CASCADE |drop table if exists order_item CASCADE 
+1749791736578|0|statement|connection 35|url jdbc:h2:mem:a4231463-9ce9-43a3-8864-65dee9065050|drop table if exists orders CASCADE |drop table if exists orders CASCADE 
+1749791736579|0|statement|connection 35|url jdbc:h2:mem:a4231463-9ce9-43a3-8864-65dee9065050|drop sequence if exists hibernate_sequence|drop sequence if exists hibernate_sequence
+1749791824852|3|statement|connection 35|url jdbc:h2:mem:1bb76aa6-3ac1-48c9-aabe-cb8afebcd3f6|drop table if exists category CASCADE |drop table if exists category CASCADE 
+1749791824853|0|statement|connection 35|url jdbc:h2:mem:1bb76aa6-3ac1-48c9-aabe-cb8afebcd3f6|drop table if exists category_item CASCADE |drop table if exists category_item CASCADE 
+1749791824854|0|statement|connection 35|url jdbc:h2:mem:1bb76aa6-3ac1-48c9-aabe-cb8afebcd3f6|drop table if exists delivery CASCADE |drop table if exists delivery CASCADE 
+1749791824855|0|statement|connection 35|url jdbc:h2:mem:1bb76aa6-3ac1-48c9-aabe-cb8afebcd3f6|drop table if exists item CASCADE |drop table if exists item CASCADE 
+1749791824856|0|statement|connection 35|url jdbc:h2:mem:1bb76aa6-3ac1-48c9-aabe-cb8afebcd3f6|drop table if exists member CASCADE |drop table if exists member CASCADE 
+1749791824857|0|statement|connection 35|url jdbc:h2:mem:1bb76aa6-3ac1-48c9-aabe-cb8afebcd3f6|drop table if exists order_item CASCADE |drop table if exists order_item CASCADE 
+1749791824857|0|statement|connection 35|url jdbc:h2:mem:1bb76aa6-3ac1-48c9-aabe-cb8afebcd3f6|drop table if exists orders CASCADE |drop table if exists orders CASCADE 
+1749791824858|0|statement|connection 35|url jdbc:h2:mem:1bb76aa6-3ac1-48c9-aabe-cb8afebcd3f6|drop sequence if exists hibernate_sequence|drop sequence if exists hibernate_sequence
+1749791945650|2|statement|connection 35|url jdbc:h2:mem:61edac59-0aa2-4f62-9575-386085524cc5|drop table if exists category CASCADE |drop table if exists category CASCADE 
+1749791945651|0|statement|connection 35|url jdbc:h2:mem:61edac59-0aa2-4f62-9575-386085524cc5|drop table if exists category_item CASCADE |drop table if exists category_item CASCADE 
+1749791945652|0|statement|connection 35|url jdbc:h2:mem:61edac59-0aa2-4f62-9575-386085524cc5|drop table if exists delivery CASCADE |drop table if exists delivery CASCADE 
+1749791945653|0|statement|connection 35|url jdbc:h2:mem:61edac59-0aa2-4f62-9575-386085524cc5|drop table if exists item CASCADE |drop table if exists item CASCADE 
+1749791945653|0|statement|connection 35|url jdbc:h2:mem:61edac59-0aa2-4f62-9575-386085524cc5|drop table if exists member CASCADE |drop table if exists member CASCADE 
+1749791945654|0|statement|connection 35|url jdbc:h2:mem:61edac59-0aa2-4f62-9575-386085524cc5|drop table if exists order_item CASCADE |drop table if exists order_item CASCADE 
+1749791945655|0|statement|connection 35|url jdbc:h2:mem:61edac59-0aa2-4f62-9575-386085524cc5|drop table if exists orders CASCADE |drop table if exists orders CASCADE 
+1749791945655|0|statement|connection 35|url jdbc:h2:mem:61edac59-0aa2-4f62-9575-386085524cc5|drop sequence if exists hibernate_sequence|drop sequence if exists hibernate_sequence
+1749791988762|3|statement|connection 35|url jdbc:h2:mem:7ef5115f-8e6c-4456-ba2f-102e8b4d8cda|drop table if exists category CASCADE |drop table if exists category CASCADE 
+1749791988764|0|statement|connection 35|url jdbc:h2:mem:7ef5115f-8e6c-4456-ba2f-102e8b4d8cda|drop table if exists category_item CASCADE |drop table if exists category_item CASCADE 
+1749791988765|0|statement|connection 35|url jdbc:h2:mem:7ef5115f-8e6c-4456-ba2f-102e8b4d8cda|drop table if exists delivery CASCADE |drop table if exists delivery CASCADE 
+1749791988766|1|statement|connection 35|url jdbc:h2:mem:7ef5115f-8e6c-4456-ba2f-102e8b4d8cda|drop table if exists item CASCADE |drop table if exists item CASCADE 
+1749791988767|0|statement|connection 35|url jdbc:h2:mem:7ef5115f-8e6c-4456-ba2f-102e8b4d8cda|drop table if exists member CASCADE |drop table if exists member CASCADE 
+1749791988768|0|statement|connection 35|url jdbc:h2:mem:7ef5115f-8e6c-4456-ba2f-102e8b4d8cda|drop table if exists order_item CASCADE |drop table if exists order_item CASCADE 
+1749791988769|0|statement|connection 35|url jdbc:h2:mem:7ef5115f-8e6c-4456-ba2f-102e8b4d8cda|drop table if exists orders CASCADE |drop table if exists orders CASCADE 
+1749791988769|0|statement|connection 35|url jdbc:h2:mem:7ef5115f-8e6c-4456-ba2f-102e8b4d8cda|drop sequence if exists hibernate_sequence|drop sequence if exists hibernate_sequence
+1749792386837|8|statement|connection 35|url jdbc:h2:mem:a1b71e03-9c17-4fcf-b7ca-b97d1dc28b19|drop table if exists category CASCADE |drop table if exists category CASCADE 
+1749792386844|3|statement|connection 35|url jdbc:h2:mem:a1b71e03-9c17-4fcf-b7ca-b97d1dc28b19|drop table if exists category_item CASCADE |drop table if exists category_item CASCADE 
+1749792386848|2|statement|connection 35|url jdbc:h2:mem:a1b71e03-9c17-4fcf-b7ca-b97d1dc28b19|drop table if exists delivery CASCADE |drop table if exists delivery CASCADE 
+1749792386850|0|statement|connection 35|url jdbc:h2:mem:a1b71e03-9c17-4fcf-b7ca-b97d1dc28b19|drop table if exists item CASCADE |drop table if exists item CASCADE 
+1749792386851|0|statement|connection 35|url jdbc:h2:mem:a1b71e03-9c17-4fcf-b7ca-b97d1dc28b19|drop table if exists member CASCADE |drop table if exists member CASCADE 
+1749792386852|0|statement|connection 35|url jdbc:h2:mem:a1b71e03-9c17-4fcf-b7ca-b97d1dc28b19|drop table if exists order_item CASCADE |drop table if exists order_item CASCADE 
+1749792386854|1|statement|connection 35|url jdbc:h2:mem:a1b71e03-9c17-4fcf-b7ca-b97d1dc28b19|drop table if exists orders CASCADE |drop table if exists orders CASCADE 
+1749792386857|0|statement|connection 35|url jdbc:h2:mem:a1b71e03-9c17-4fcf-b7ca-b97d1dc28b19|drop sequence if exists hibernate_sequence|drop sequence if exists hibernate_sequence
+1749794249073|2|statement|connection 35|url jdbc:h2:mem:9649754a-b2c4-4965-ab83-81bd3d3be872|drop table if exists category CASCADE |drop table if exists category CASCADE 
+1749794249074|0|statement|connection 35|url jdbc:h2:mem:9649754a-b2c4-4965-ab83-81bd3d3be872|drop table if exists category_item CASCADE |drop table if exists category_item CASCADE 
+1749794249075|0|statement|connection 35|url jdbc:h2:mem:9649754a-b2c4-4965-ab83-81bd3d3be872|drop table if exists delivery CASCADE |drop table if exists delivery CASCADE 
+1749794249075|0|statement|connection 35|url jdbc:h2:mem:9649754a-b2c4-4965-ab83-81bd3d3be872|drop table if exists item CASCADE |drop table if exists item CASCADE 
+1749794249076|0|statement|connection 35|url jdbc:h2:mem:9649754a-b2c4-4965-ab83-81bd3d3be872|drop table if exists member CASCADE |drop table if exists member CASCADE 
+1749794249076|0|statement|connection 35|url jdbc:h2:mem:9649754a-b2c4-4965-ab83-81bd3d3be872|drop table if exists order_item CASCADE |drop table if exists order_item CASCADE 
+1749794249077|0|statement|connection 35|url jdbc:h2:mem:9649754a-b2c4-4965-ab83-81bd3d3be872|drop table if exists orders CASCADE |drop table if exists orders CASCADE 
+1749794249077|0|statement|connection 35|url jdbc:h2:mem:9649754a-b2c4-4965-ab83-81bd3d3be872|drop sequence if exists hibernate_sequence|drop sequence if exists hibernate_sequence
+1749794294667|2|statement|connection 35|url jdbc:h2:mem:21566ec1-bd2e-4b11-9a7e-58f672482a37|drop table if exists category CASCADE |drop table if exists category CASCADE 
+1749794294669|0|statement|connection 35|url jdbc:h2:mem:21566ec1-bd2e-4b11-9a7e-58f672482a37|drop table if exists category_item CASCADE |drop table if exists category_item CASCADE 
+1749794294670|0|statement|connection 35|url jdbc:h2:mem:21566ec1-bd2e-4b11-9a7e-58f672482a37|drop table if exists delivery CASCADE |drop table if exists delivery CASCADE 
+1749794294670|0|statement|connection 35|url jdbc:h2:mem:21566ec1-bd2e-4b11-9a7e-58f672482a37|drop table if exists item CASCADE |drop table if exists item CASCADE 
+1749794294671|0|statement|connection 35|url jdbc:h2:mem:21566ec1-bd2e-4b11-9a7e-58f672482a37|drop table if exists member CASCADE |drop table if exists member CASCADE 
+1749794294672|0|statement|connection 35|url jdbc:h2:mem:21566ec1-bd2e-4b11-9a7e-58f672482a37|drop table if exists order_item CASCADE |drop table if exists order_item CASCADE 
+1749794294672|0|statement|connection 35|url jdbc:h2:mem:21566ec1-bd2e-4b11-9a7e-58f672482a37|drop table if exists orders CASCADE |drop table if exists orders CASCADE 
+1749794294672|0|statement|connection 35|url jdbc:h2:mem:21566ec1-bd2e-4b11-9a7e-58f672482a37|drop sequence if exists hibernate_sequence|drop sequence if exists hibernate_sequence
+1749794338831|2|statement|connection 35|url jdbc:h2:mem:95bec05d-7b3d-462f-9004-1b448e40418d|drop table if exists category CASCADE |drop table if exists category CASCADE 
+1749794338833|0|statement|connection 35|url jdbc:h2:mem:95bec05d-7b3d-462f-9004-1b448e40418d|drop table if exists category_item CASCADE |drop table if exists category_item CASCADE 
+1749794338833|0|statement|connection 35|url jdbc:h2:mem:95bec05d-7b3d-462f-9004-1b448e40418d|drop table if exists delivery CASCADE |drop table if exists delivery CASCADE 
+1749794338834|0|statement|connection 35|url jdbc:h2:mem:95bec05d-7b3d-462f-9004-1b448e40418d|drop table if exists item CASCADE |drop table if exists item CASCADE 
+1749794338835|0|statement|connection 35|url jdbc:h2:mem:95bec05d-7b3d-462f-9004-1b448e40418d|drop table if exists member CASCADE |drop table if exists member CASCADE 
+1749794338836|0|statement|connection 35|url jdbc:h2:mem:95bec05d-7b3d-462f-9004-1b448e40418d|drop table if exists order_item CASCADE |drop table if exists order_item CASCADE 
+1749794338836|0|statement|connection 35|url jdbc:h2:mem:95bec05d-7b3d-462f-9004-1b448e40418d|drop table if exists orders CASCADE |drop table if exists orders CASCADE 
+1749794338837|0|statement|connection 35|url jdbc:h2:mem:95bec05d-7b3d-462f-9004-1b448e40418d|drop sequence if exists hibernate_sequence|drop sequence if exists hibernate_sequence
+1749794404627|4|statement|connection 35|url jdbc:h2:mem:71387ec7-c5fc-4076-b4a2-ed93e2d52cc4|drop table if exists category CASCADE |drop table if exists category CASCADE 
+1749794404628|0|statement|connection 35|url jdbc:h2:mem:71387ec7-c5fc-4076-b4a2-ed93e2d52cc4|drop table if exists category_item CASCADE |drop table if exists category_item CASCADE 
+1749794404629|0|statement|connection 35|url jdbc:h2:mem:71387ec7-c5fc-4076-b4a2-ed93e2d52cc4|drop table if exists delivery CASCADE |drop table if exists delivery CASCADE 
+1749794404630|0|statement|connection 35|url jdbc:h2:mem:71387ec7-c5fc-4076-b4a2-ed93e2d52cc4|drop table if exists item CASCADE |drop table if exists item CASCADE 
+1749794404631|1|statement|connection 35|url jdbc:h2:mem:71387ec7-c5fc-4076-b4a2-ed93e2d52cc4|drop table if exists member CASCADE |drop table if exists member CASCADE 
+1749794404632|0|statement|connection 35|url jdbc:h2:mem:71387ec7-c5fc-4076-b4a2-ed93e2d52cc4|drop table if exists order_item CASCADE |drop table if exists order_item CASCADE 
+1749794404632|0|statement|connection 35|url jdbc:h2:mem:71387ec7-c5fc-4076-b4a2-ed93e2d52cc4|drop table if exists orders CASCADE |drop table if exists orders CASCADE 
+1749794404632|0|statement|connection 35|url jdbc:h2:mem:71387ec7-c5fc-4076-b4a2-ed93e2d52cc4|drop sequence if exists hibernate_sequence|drop sequence if exists hibernate_sequence
+1749794493400|3|statement|connection 34|url jdbc:h2:mem:d1746d4b-2110-4416-a3fe-7905f6133aec|drop table if exists category CASCADE |drop table if exists category CASCADE 
+1749794493401|0|statement|connection 34|url jdbc:h2:mem:d1746d4b-2110-4416-a3fe-7905f6133aec|drop table if exists category_item CASCADE |drop table if exists category_item CASCADE 
+1749794493402|0|statement|connection 34|url jdbc:h2:mem:d1746d4b-2110-4416-a3fe-7905f6133aec|drop table if exists delivery CASCADE |drop table if exists delivery CASCADE 
+1749794493403|0|statement|connection 34|url jdbc:h2:mem:d1746d4b-2110-4416-a3fe-7905f6133aec|drop table if exists item CASCADE |drop table if exists item CASCADE 
+1749794493404|0|statement|connection 34|url jdbc:h2:mem:d1746d4b-2110-4416-a3fe-7905f6133aec|drop table if exists member CASCADE |drop table if exists member CASCADE 
+1749794493404|0|statement|connection 34|url jdbc:h2:mem:d1746d4b-2110-4416-a3fe-7905f6133aec|drop table if exists order_item CASCADE |drop table if exists order_item CASCADE 
+1749794493405|0|statement|connection 34|url jdbc:h2:mem:d1746d4b-2110-4416-a3fe-7905f6133aec|drop table if exists orders CASCADE |drop table if exists orders CASCADE 
+1749794493405|0|statement|connection 34|url jdbc:h2:mem:d1746d4b-2110-4416-a3fe-7905f6133aec|drop sequence if exists hibernate_sequence|drop sequence if exists hibernate_sequence
+1749794593025|2|statement|connection 35|url jdbc:h2:mem:d3b16379-21cf-49f3-b664-960c2d7ac68d|drop table if exists category CASCADE |drop table if exists category CASCADE 
+1749794593027|0|statement|connection 35|url jdbc:h2:mem:d3b16379-21cf-49f3-b664-960c2d7ac68d|drop table if exists category_item CASCADE |drop table if exists category_item CASCADE 
+1749794593027|0|statement|connection 35|url jdbc:h2:mem:d3b16379-21cf-49f3-b664-960c2d7ac68d|drop table if exists delivery CASCADE |drop table if exists delivery CASCADE 
+1749794593028|0|statement|connection 35|url jdbc:h2:mem:d3b16379-21cf-49f3-b664-960c2d7ac68d|drop table if exists item CASCADE |drop table if exists item CASCADE 
+1749794593029|0|statement|connection 35|url jdbc:h2:mem:d3b16379-21cf-49f3-b664-960c2d7ac68d|drop table if exists member CASCADE |drop table if exists member CASCADE 
+1749794593029|0|statement|connection 35|url jdbc:h2:mem:d3b16379-21cf-49f3-b664-960c2d7ac68d|drop table if exists order_item CASCADE |drop table if exists order_item CASCADE 
+1749794593029|0|statement|connection 35|url jdbc:h2:mem:d3b16379-21cf-49f3-b664-960c2d7ac68d|drop table if exists orders CASCADE |drop table if exists orders CASCADE 
+1749794593030|0|statement|connection 35|url jdbc:h2:mem:d3b16379-21cf-49f3-b664-960c2d7ac68d|drop sequence if exists hibernate_sequence|drop sequence if exists hibernate_sequence
+1749794667747|4|statement|connection 35|url jdbc:h2:mem:3b2035b9-13c2-4a00-9190-1ce7cb1e33ce|drop table if exists category CASCADE |drop table if exists category CASCADE 
+1749794667749|0|statement|connection 35|url jdbc:h2:mem:3b2035b9-13c2-4a00-9190-1ce7cb1e33ce|drop table if exists category_item CASCADE |drop table if exists category_item CASCADE 
+1749794667749|0|statement|connection 35|url jdbc:h2:mem:3b2035b9-13c2-4a00-9190-1ce7cb1e33ce|drop table if exists delivery CASCADE |drop table if exists delivery CASCADE 
+1749794667750|0|statement|connection 35|url jdbc:h2:mem:3b2035b9-13c2-4a00-9190-1ce7cb1e33ce|drop table if exists item CASCADE |drop table if exists item CASCADE 
+1749794667751|0|statement|connection 35|url jdbc:h2:mem:3b2035b9-13c2-4a00-9190-1ce7cb1e33ce|drop table if exists member CASCADE |drop table if exists member CASCADE 
+1749794667751|0|statement|connection 35|url jdbc:h2:mem:3b2035b9-13c2-4a00-9190-1ce7cb1e33ce|drop table if exists order_item CASCADE |drop table if exists order_item CASCADE 
+1749794667752|0|statement|connection 35|url jdbc:h2:mem:3b2035b9-13c2-4a00-9190-1ce7cb1e33ce|drop table if exists orders CASCADE |drop table if exists orders CASCADE 
+1749794667752|0|statement|connection 35|url jdbc:h2:mem:3b2035b9-13c2-4a00-9190-1ce7cb1e33ce|drop sequence if exists hibernate_sequence|drop sequence if exists hibernate_sequence
+1749795806986|1|statement|connection 23|url jdbc:h2:mem:3cc0f749-ec13-41f8-9580-5b53138e5b00|drop table if exists category CASCADE |drop table if exists category CASCADE 
+1749795806987|0|statement|connection 23|url jdbc:h2:mem:3cc0f749-ec13-41f8-9580-5b53138e5b00|drop table if exists category_item CASCADE |drop table if exists category_item CASCADE 
+1749795806987|0|statement|connection 23|url jdbc:h2:mem:3cc0f749-ec13-41f8-9580-5b53138e5b00|drop table if exists delivery CASCADE |drop table if exists delivery CASCADE 
+1749795806988|0|statement|connection 23|url jdbc:h2:mem:3cc0f749-ec13-41f8-9580-5b53138e5b00|drop table if exists item CASCADE |drop table if exists item CASCADE 
+1749795806988|0|statement|connection 23|url jdbc:h2:mem:3cc0f749-ec13-41f8-9580-5b53138e5b00|drop table if exists member CASCADE |drop table if exists member CASCADE 
+1749795806988|0|statement|connection 23|url jdbc:h2:mem:3cc0f749-ec13-41f8-9580-5b53138e5b00|drop table if exists order_item CASCADE |drop table if exists order_item CASCADE 
+1749795806989|0|statement|connection 23|url jdbc:h2:mem:3cc0f749-ec13-41f8-9580-5b53138e5b00|drop table if exists orders CASCADE |drop table if exists orders CASCADE 
+1749795806989|0|statement|connection 23|url jdbc:h2:mem:3cc0f749-ec13-41f8-9580-5b53138e5b00|drop sequence if exists hibernate_sequence|drop sequence if exists hibernate_sequence

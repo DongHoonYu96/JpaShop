@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 @Component
-@Profile({"!test", "!local"})
+@Profile("!test & !local")
 @RequiredArgsConstructor
 public class InitDb {
 

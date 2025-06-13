@@ -1,19 +1,11 @@
 package jpabook.jpashop.repository;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.JoinType;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderStatus;
 import org.springframework.stereotype.Repository;
@@ -46,7 +38,7 @@ public class OrderRepository {
         return em.find(Order.class, id);
     }
 
-    //쿼리dsl
+    //language=querydsl
     public List<Order> findAllByQueryDsl(OrderSearch orderSearch){
         return query
                 .select(order)

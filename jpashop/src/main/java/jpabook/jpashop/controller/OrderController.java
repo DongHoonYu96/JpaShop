@@ -36,8 +36,6 @@ public class OrderController {
 
     }
 
-    //"제출" 누르면 /order URL을 POST방식으로 호출
-    //고객아이디, 아이템아이디, 수량 받아서 함수내용실행
     @PostMapping(value = "/order")
     public String order(@RequestParam("memberId") Long memberId,
                         @RequestParam("itemId") Long itemId,
@@ -54,8 +52,6 @@ public class OrderController {
     public String orderList(@ModelAttribute("orderSearch") OrderSearch orderSearch, Model model){
         List<Order> orders = orderService.findOrders(orderSearch);
         model.addAttribute("orders",orders);    //orders를 들고 html로 가라
-        //model.addAttribute("orderSearch",orderSearch);    //@ModelATtribute => 자동으로 모델에 담아줌. 받기도가능
-
         return "order/orderList";
     }
 

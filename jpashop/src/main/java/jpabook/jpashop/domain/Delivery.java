@@ -15,8 +15,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Getter
 @Setter
+@Getter
 public class Delivery {
 
     @Id
@@ -33,4 +33,8 @@ public class Delivery {
 
     @Enumerated(EnumType.STRING)
     private DeliveryStatus status; //READY, COMP(배송중)
+
+    public void startShipping() {
+        this.status = DeliveryStatus.SHIPPING;
+    }
 }

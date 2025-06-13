@@ -92,6 +92,23 @@ public class OrderServiceTest {
         fail("여기로 오면 안됨. 재고부족예외가 터져야한다.");
     }
 
+    @Test(expected = IllegalStateException.class)
+    @DisplayName("배송중인 주문을 취소하는 경우 예외가 발생해야 한다.")
+    public void 주문취소_배송중() {
+        // Given
+        Member member = createMember();
+        Book book = createBook("시골 JPA", 10000, 10);
+        int orderCount = 2;
+        Long orderId = orderService.order(member.getId(), book.getId(), orderCount);
+        Order order = orderRepository.findOne(orderId);
+
+        // 배송 상태를 SHIPPING으로 설정
+        order.getDelivery().startShipping();
+        order.cancel();
+
+        fail("여기로 오면 안됨. 배송중인 주문은 취소할 수 없으므로 예외가 발생해야 한다.");
+    }
+
     private Book createBook(String name, int price, int stockQuantity) {
         Book book = Book.builder()
                 .name(name)

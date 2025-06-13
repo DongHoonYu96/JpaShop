@@ -28,8 +28,6 @@ public class OrderService {
     @Transactional(readOnly = false)
     public Long order(Long memberId, Long itemId, int count){
         boolean isActive = TransactionSynchronizationManager.isActualTransactionActive();
-        log.info("Actual class: {}", this.getClass());
-        log.info("[{}] Transaction Active: {}", Thread.currentThread().getName(), isActive);
         //엔티티 조회
         Member member=memberRepository.findOne(memberId);
         Item item=itemRepository.findOne(itemId);

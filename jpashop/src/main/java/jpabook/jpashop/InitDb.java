@@ -15,13 +15,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 @Component
-@Profile("!test")  //테스트환경이 아닐때만 실행
+@Profile({"!test", "!local"})
 @RequiredArgsConstructor
 public class InitDb {
 
     private final InitService initService;
 
-//    @PostConstruct  //스프링빈이 올라온 후 (의존성 주입 후) 실행해줘
+    @PostConstruct
     public void init() {
         initService.dbInit1();
         initService.dbInit2();
@@ -98,8 +98,6 @@ public class InitDb {
             member.setAddress(new Address(city, street, zipcode));
             return member;
         }
-
-
     }
 }
 

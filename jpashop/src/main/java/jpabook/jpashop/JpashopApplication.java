@@ -25,5 +25,4 @@ public class JpashopApplication {
     public LogTrace logTrace() {
         return new ThreadLocalLogTrace();
     }
-
 }

@@ -3,6 +3,7 @@ package jpabook.jpashop.domain;
 import jpabook.jpashop.domain.item.Book;
 import jpabook.jpashop.domain.item.Item;
 import jpabook.jpashop.repository.ItemRepository;
+import jpabook.jpashop.service.OrderService;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;

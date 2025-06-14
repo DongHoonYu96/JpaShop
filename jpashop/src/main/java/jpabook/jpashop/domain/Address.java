@@ -5,7 +5,7 @@ import lombok.Getter;
 
 import javax.persistence.Embeddable;
 
-@Embeddable //내장가능
+@Embeddable
 @Getter
 @EqualsAndHashCode
 public class Address {

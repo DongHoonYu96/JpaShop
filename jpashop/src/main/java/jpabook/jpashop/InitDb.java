@@ -9,6 +9,7 @@ import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderItem;
 import jpabook.jpashop.domain.item.Book;
+import jpabook.jpashop.domain.item.UploadFile;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -40,6 +41,7 @@ public class InitDb {
             em.persist(member);
 
             Book book1 = createBook("JPA1 BOOK", 10000, 100);
+            book1.getImages().add(new UploadFile("jpa.png", "jpa.png"));
             em.persist(book1);
 
             Book book2 = createBook("JPA2 BOOK", 20000, 100);

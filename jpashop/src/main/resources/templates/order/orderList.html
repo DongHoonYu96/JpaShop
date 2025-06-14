@@ -47,7 +47,7 @@
         <td th:text="${item.orderItems[0].price}"></td>
         <td th:text="${item.orderItems[0].quantity}"></td>
         <td th:text="${item.status}"></td>
-        <td th:text="${item.orderDate}"></td>
+        <td th:text="${#temporals.format(item.orderDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
         <td>
           <a th:if="${item.status.name() == 'ORDER'}" href="#" th:href="'javascript:cancel('+${item.id}+')'"
              class="btn btn-danger">CANCEL</a>

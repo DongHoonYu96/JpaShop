@@ -10,6 +10,7 @@ import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,10 +31,18 @@ public abstract class Item {
     private int price;
     private int stockQuantity;
 
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(
+            name = "item_image",
+            joinColumns = @JoinColumn(name = "item_id")
+    )
+    @OrderColumn(name = "list_idx")
+    private List<UploadFile> images = new ArrayList<>();
+
     @ManyToMany(mappedBy = "items")
     private List<Category> categories = new ArrayList<>();
 
-    protected Item(String name , int price, int stockQuantity){
+    protected Item(String name , int price, int stockQuantity) {
         this.name=name;
         this.price=price;
         this.stockQuantity=stockQuantity;

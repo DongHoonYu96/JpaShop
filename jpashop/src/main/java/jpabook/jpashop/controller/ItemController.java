@@ -5,7 +5,9 @@ import jpabook.jpashop.controller.Form.BookSaveForm;
 import jpabook.jpashop.controller.Form.BookUpdateForm;
 import jpabook.jpashop.domain.item.Book;
 import jpabook.jpashop.domain.item.Item;
+import jpabook.jpashop.domain.item.UploadFile;
 import jpabook.jpashop.service.ItemService;
+import jpabook.jpashop.util.FileStore;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -13,7 +15,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -22,6 +26,7 @@ import java.util.List;
 public class ItemController {
 
     private final ItemService itemService;
+    private final FileStore fileStore;
 
     @GetMapping("/items/new")
     public String createForm(Model model) {
@@ -32,7 +37,7 @@ public class ItemController {
     @PostMapping("/items/new")
     public String create(
             @Validated @ModelAttribute("form")BookSaveForm form, //html에서 넘어온 form을 BookForm으로 바꿔서 받음
-            BindingResult bindingResult) {
+            BindingResult bindingResult) throws IOException {
         Book book = Book.builder()
                 .name(form.getName())
                 .price(form.getPrice())
@@ -40,6 +45,9 @@ public class ItemController {
                 .author(form.getAuthor())
                 .isbn(form.getIsbn())
                 .build();
+
+        List<UploadFile> storeImageFiles = fileStore.storeFiles(form.getImageFiles());
+        book.setImages(storeImageFiles);
 
         if(bindingResult.hasErrors()) {
             log.info("errors={}", bindingResult);

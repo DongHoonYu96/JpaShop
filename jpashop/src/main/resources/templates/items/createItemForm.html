@@ -13,7 +13,7 @@
 <body>
 <div class="container">
     <div th:replace="fragments/bodyHeader :: bodyHeader"/>
-    <form th:action="@{/items/new}" th:object="${form}" method="post">
+    <form th:action="@{/items/new}" th:object="${form}" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label th:for="name">상품명</label>
             <input type="text" th:field="*{name}" class="form-control"
@@ -45,6 +45,17 @@
             <input type="text" th:field="*{isbn}" class="form-control"
                    placeholder="ISBN을 입력하세요">
             <div class="field-error" th:errors="*{isbn}">
+        </div>
+        <div class="form-group">
+            <label th:for="images">상품 이미지</label>
+            <input type="file"
+                   th:field="*{imageFiles}"
+                   class="form-control-file"
+                   id="images"
+                   multiple
+                   accept="image/*"/>
+            <!-- 이미지 업로드 에러 메시지 출력 -->
+            <div class="field-error" th:errors="*{imageFiles}"></div>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

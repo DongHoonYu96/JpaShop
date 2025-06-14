@@ -51,7 +51,7 @@ public class OrderController {
     @GetMapping(value = "/orders")
     public String orderList(@ModelAttribute("orderSearch") OrderSearch orderSearch, Model model){
         List<Order> orders = orderService.findOrders(orderSearch);
-        model.addAttribute("orders",orders);    //orders를 들고 html로 가라
+        model.addAttribute("orders",orders);
         return "order/orderList";
     }
 

@@ -40,11 +40,12 @@ public class InitDb {
             Member member = createMember("bisu", "123456", "userA", "서울", "1", "1111");
             em.persist(member);
 
-            Book book1 = createBook("JPA1 BOOK", 10000, 100);
+            Book book1 = createBook("자바 ORM 표준 JPA 프로그래밍", 10000, 100);
             book1.getImages().add(new UploadFile("jpa.png", "jpa.png"));
             em.persist(book1);
 
-            Book book2 = createBook("JPA2 BOOK", 20000, 100);
+            Book book2 = createBook("클린코더", 20000, 100);
+            book2.getImages().add(new UploadFile("clean_coder.png", "clean_coder.png"));
             em.persist(book2);
 
             OrderItem orderItem1 = OrderItem.createOrderItem(book1, 10000, 1);
@@ -73,10 +74,12 @@ public class InitDb {
             Member member = createMember("bingsu", "123456", "userB", "진주", "2", "2222");
             em.persist(member);
 
-            Book book1 = createBook("SPRING BOOK", 20000, 200);
+            Book book1 = createBook("오브젝트", 20000, 200);
+            book1.getImages().add(new UploadFile("object.png", "object.png"));
             em.persist(book1);
 
-            Book book2 = createBook("SPRING2 BOOK", 40000, 300);
+            Book book2 = createBook("친절한 sql 튜닝", 40000, 300);
+            book2.getImages().add(new UploadFile("kind_sql_tunning.png", "kind_sql_tunning.png"));
             em.persist(book2);
 
             OrderItem orderItem1 = OrderItem.createOrderItem(book1, 20000, 3);

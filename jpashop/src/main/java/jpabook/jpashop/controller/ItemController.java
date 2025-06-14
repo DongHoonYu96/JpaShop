@@ -10,6 +10,8 @@ import jpabook.jpashop.service.ItemService;
 import jpabook.jpashop.util.FileStore;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
 
 @Slf4j
@@ -118,5 +121,12 @@ public class ItemController {
         itemService.updateItem(itemId, form.getName(),form.getPrice(), form.getStockQuantity());
 
         return "redirect:/items";   //끝나면 목록으로 ㄱㄱ
+    }
+
+    @ResponseBody
+    @GetMapping("/images/{filename}")
+    public Resource downloadImage(@PathVariable String filename) throws
+            MalformedURLException {
+        return new UrlResource("file:" + fileStore.getFullPath(filename));
     }
 }

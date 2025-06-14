@@ -32,7 +32,7 @@ public abstract class Item {
     private int stockQuantity;
 
     @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(
+    @CollectionTable( //
             name = "item_image",
             joinColumns = @JoinColumn(name = "item_id")
     )

@@ -37,4 +37,12 @@ public class Delivery {
     public void startShipping() {
         this.status = DeliveryStatus.SHIPPING;
     }
+
+    public boolean isDeliveryComplete() {
+        return this.status == DeliveryStatus.COMPLETE;
+    }
+
+    public boolean isDeliveryShipping() {
+        return this.status == DeliveryStatus.SHIPPING;
+    }
 }

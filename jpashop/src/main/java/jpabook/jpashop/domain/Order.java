@@ -24,7 +24,7 @@ public class Order {
     @Column(name = "order_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY) //Order클래스입장에서 맴버는 1개임. Order(Many) : member(One)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
@@ -75,20 +75,20 @@ public class Order {
     //==비즈니스 로직==//
     public void cancel() {
         verifytNotYetShipped();
-        if (delivery.getStatus() == DeliveryStatus.COMPLETE) {
+        if (delivery.isDeliveryComplete()) {
             throw new IllegalStateException("이미 배송완료된 상품은 취소가 불가능합니다.");
         }
         this.setStatus(OrderStatus.CANCEL);
-        for (OrderItem orderItem : orderItems) { //
+        for (OrderItem orderItem : orderItems) {
             orderItem.cancel();
         }
     }
 
     private void verifytNotYetShipped() {
-        if (delivery.getStatus() == DeliveryStatus.SHIPPING) {
+        if (delivery.isDeliveryShipping()) {
             throw new IllegalStateException("배송중인 상품은 취소가 불가능합니다.");
         }
-        if (delivery.getStatus() == DeliveryStatus.COMPLETE) {
+        if (delivery.isDeliveryComplete()) {
             throw new IllegalStateException("이미 배송완료된 상품은 취소가 불가능합니다.");
         }
     }

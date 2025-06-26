@@ -1,21 +1,21 @@
 package jpabook.jpashop.domain.item;
 
 import jpabook.jpashop.domain.Category;
+import jpabook.jpashop.domain.Order;
+import jpabook.jpashop.domain.common.Money;
+import jpabook.jpashop.domain.item.pricing.NoneDiscountPolicy;
 import jpabook.jpashop.exception.NotEnoughStockException;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)   //상속전략 : 한 테이블에 다때려박기
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="dtype")  //자식구분자
 @Getter @Setter
 @SuperBuilder
@@ -42,10 +42,18 @@ public abstract class Item {
     @ManyToMany(mappedBy = "items")
     private List<Category> categories = new ArrayList<>();
 
-    protected Item(String name , int price, int stockQuantity) {
+    @Transient
+    private DiscountPolicy discountPolicy;
+
+    protected Item(String name , int price, int stockQuantity, DiscountPolicy discountPolicy) {
         this.name=name;
         this.price=price;
         this.stockQuantity=stockQuantity;
+        this.discountPolicy= discountPolicy;
+    }
+
+    protected Item(String name, int price, int stockQuantity) {
+        this(name, price, stockQuantity, new NoneDiscountPolicy());
     }
 
     //==비즈니스 로직==//
@@ -59,5 +67,9 @@ public abstract class Item {
             throw new NotEnoughStockException("need more stock");
         }
         this.stockQuantity=restStock;
+    }
+
+    public Money calculateItemFee(Order order) {
+        return Money.of(price).minus(discountPolicy.calculateDiscountAmount(order, this));
     }
 }

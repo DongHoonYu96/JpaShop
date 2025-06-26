@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 import jpabook.jpashop.domain.common.Money;
 import jpabook.jpashop.domain.common.jpa.MoneyConverter;
+import jpabook.jpashop.domain.item.DiscountPolicy;
 import jpabook.jpashop.domain.item.Item;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,14 +33,9 @@ public class OrderItem {
     @Convert(converter = MoneyConverter.class)
     @Column(name="price")
     private Money price;
-
-    @Convert(converter = MoneyConverter.class)
-    @Column(name = "amounts")
-    private Money amounts;
-
+    
     @Column(name = "quantity")
     private int quantity;
-
 
     //==생성 메서드==//
     public static OrderItem createOrderItem(Item item, int orderPrice, int quantity) {
@@ -47,7 +43,6 @@ public class OrderItem {
         orderItem.setItem(item);
         orderItem.setPrice(new Money(orderPrice));
         orderItem.setQuantity(quantity);
-        orderItem.setAmounts(orderItem.calculateAmounts());
 
         item.removeStock(quantity);
         return orderItem;
@@ -59,7 +54,8 @@ public class OrderItem {
     }
 
     //==조회 로직==//
-    private Money calculateAmounts() {
-        return price.multiply(quantity);
+    public Money calculateAmounts() {
+        Money money = item.calculateItemFee(order);
+        return money.multiply(quantity);
     }
 }

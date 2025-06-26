@@ -1,5 +1,6 @@
 package jpabook.jpashop.domain.item;
 
+import jpabook.jpashop.domain.item.pricing.NoneDiscountPolicy;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,8 +19,14 @@ public class Book extends Item{
     private String isbn;
 
     @Builder
+    public Book(String name, int price, int stockQuantity, String author, String isbn, DiscountPolicy discountPolicy) {
+        super(name, price, stockQuantity, discountPolicy);
+        this.author = author;
+        this.isbn = isbn;
+    }
+
     public Book(String name, int price, int stockQuantity, String author, String isbn) {
-        super(name, price, stockQuantity);
+        super(name, price, stockQuantity, new NoneDiscountPolicy());
         this.author = author;
         this.isbn = isbn;
     }

@@ -3,6 +3,7 @@ package jpabook.jpashop.domain;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import javax.management.Query;
 import javax.persistence.*;
 
 import jpabook.jpashop.domain.common.Money;
@@ -94,9 +95,9 @@ public class Order {
     }
 
     //==조회 로직==//
-    public int getTotalPrice() {
-        return new Money(orderItems.stream()
-                .mapToInt(x -> x.getAmounts().getValue()).sum()).getValue();
+    public Money getTotalPrice() {
+        return orderItems.stream()
+                .map(OrderItem::calculateAmounts)
+                .reduce(Money.ZERO, Money::plus);
     }
-
 }

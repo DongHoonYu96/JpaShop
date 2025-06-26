@@ -35,7 +35,7 @@ public class ItemServiceTest {
 
     @Test
     @DisplayName("상품이름 수정시 변경된 값이 반영되어야 한다.")
-    public void updateItemTest(){
+    public void updateItemTest() {
         Book book = createItem();
 
         book.setName("JPA Version 2");

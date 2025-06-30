@@ -10,10 +10,16 @@ import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderItem;
 import jpabook.jpashop.domain.item.Book;
 import jpabook.jpashop.domain.item.UploadFile;
+import jpabook.jpashop.domain.item.pricing.NoneDiscountPolicy;
+import jpabook.jpashop.domain.item.pricing.PercentDiscountPolicy;
+import jpabook.jpashop.domain.item.pricing.PeriodCondition;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.DayOfWeek;
+import java.time.LocalTime;
 
 @Component
 @Profile("!test")
@@ -27,6 +33,7 @@ public class InitDb {
         initService.dbInit1();
         initService.dbInit2();
         initService.dbInit3();
+        initService.dbInit4();
     }
 
     @Component
@@ -40,11 +47,11 @@ public class InitDb {
             Member member = createMember("bisu", "123456", "userA", "서울", "1", "1111");
             em.persist(member);
 
-            Book book1 = createBook("자바 ORM 표준 JPA 프로그래밍", 10000, 100);
+            Book book1 = createBook("자바 ORM 표준 JPA 프로그래밍", 10000, 100, "김영한");
             book1.getImages().add(new UploadFile("jpa.png", "jpa.png"));
             em.persist(book1);
 
-            Book book2 = createBook("클린코더", 20000, 100);
+            Book book2 = createBook("클린코더", 20000, 100, "로버트 마틴");
             book2.getImages().add(new UploadFile("clean_coder.png", "clean_coder.png"));
             em.persist(book2);
 
@@ -62,37 +69,51 @@ public class InitDb {
             return delivery;
         }
 
-        public static Book createBook(String name, int price, int stockQuantity) {
+        public static Book createBook(String name, int price, int stockQuantity, String author) {
             return Book.builder().
                     name(name).
                     price(price).
                     stockQuantity(stockQuantity).
+                    author(author).
+                    discountPolicy(new NoneDiscountPolicy()).
                     build();
         }
 
         public void dbInit2() {
             Member member = createMember("bingsu", "123456", "userB", "진주", "2", "2222");
             em.persist(member);
+//
+//            Book book1 = createBook("오브젝트", 20000, 200, "조영호");
+//            book1.getImages().add(new UploadFile("object.png", "object.png"));
+//            em.persist(book1);
 
-            Book book1 = createBook("오브젝트", 20000, 200);
-            book1.getImages().add(new UploadFile("object.png", "object.png"));
-            em.persist(book1);
-
-            Book book2 = createBook("친절한 sql 튜닝", 40000, 300);
+            Book book2 = createBook("친절한 sql 튜닝", 40000, 300, "조시형");
             book2.getImages().add(new UploadFile("kind_sql_tunning.png", "kind_sql_tunning.png"));
             em.persist(book2);
 
-            OrderItem orderItem1 = OrderItem.createOrderItem(book1, 20000, 3);
             OrderItem orderItem2 = OrderItem.createOrderItem(book2, 40000, 4);
 
             Delivery delivery = createDelivery(member);
-            Order order = Order.createOrder(member, delivery, orderItem1, orderItem2);
+            Order order = Order.createOrder(member, delivery, orderItem2);
             em.persist(order);
         }
 
         public void dbInit3() {
             Member member = createMember("admin", "admin!", "admin", "진주", "2", "2222");
             em.persist(member);
+        }
+
+        public void dbInit4() {
+            Book book = new Book("Test Item", 10000, 10, "조영호", "오브젝트",
+                    new PercentDiscountPolicy(0.3,
+                            new PeriodCondition(
+                                    DayOfWeek.THURSDAY,
+                                    LocalTime.of(0, 0),
+                                    LocalTime.of(23, 59)
+                            )
+                    ));
+            book.getImages().add(new UploadFile("object.png", "object.png"));
+            em.persist(book);
         }
 
         public static Member createMember(String loginId, String password, String name, String city, String street, String zipcode) {

@@ -2,11 +2,19 @@ package jpabook.jpashop.domain.item.pricing;
 
 import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.item.DiscountCondition;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 
-public class PeriodCondition implements DiscountCondition {
+@Entity
+@Getter
+@DiscriminatorValue("PERIOD")
+@NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
+public class PeriodCondition extends DiscountCondition {
     private DayOfWeek dayOfWeek;
     private LocalTime startTime;
     private LocalTime endTime;

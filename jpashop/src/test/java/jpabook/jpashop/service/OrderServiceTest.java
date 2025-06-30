@@ -3,6 +3,7 @@ package jpabook.jpashop.service;
 import jpabook.jpashop.domain.*;
 import jpabook.jpashop.domain.item.Book;
 import jpabook.jpashop.domain.item.Item;
+import jpabook.jpashop.domain.item.pricing.NoneDiscountPolicy;
 import jpabook.jpashop.exception.NotEnoughStockException;
 import jpabook.jpashop.repository.OrderRepository;
 import org.junit.Test;
@@ -51,7 +52,7 @@ public class OrderServiceTest {
         //(메세지, 기대값, 실제값)
         assertEquals("상품 주문시 상태가 ORDER여야 한다.", OrderStatus.ORDER,getOrder.getStatus());
         assertEquals("주문한 상품 종류 수가 정확해야 한다.",1,getOrder.getOrderItems().size());
-        assertEquals("주문 가격은 가격*수량이어야 한다.",10000*orderCount,getOrder.getTotalPrice());
+        assertEquals("주문 가격은 가격*수량이어야 한다.",10000*orderCount,getOrder.getTotalPrice().getValue());
         assertEquals("주문 수량만큼 재고가 줄어야 한다.",8,book.getStockQuantity());
     }
 
@@ -114,6 +115,7 @@ public class OrderServiceTest {
                 .name(name)
                 .price(price)
                 .stockQuantity(stockQuantity)
+                .discountPolicy(new NoneDiscountPolicy())
                 .build();
         em.persist(book);
         return book;

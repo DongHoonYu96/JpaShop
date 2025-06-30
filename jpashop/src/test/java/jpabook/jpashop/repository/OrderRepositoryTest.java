@@ -34,10 +34,10 @@ class OrderRepositoryTest {
         Member member = createMember("bisu", "123456", "userA", "서울", "1", "1111");
         em.persist(member);
 
-        Book book1 = createBook("JPA1 BOOK", 10000, 100);
+        Book book1 = createBook("JPA1 BOOK", 10000, 100, "김영한");
         em.persist(book1);
 
-        Book book2 = createBook("JPA2 BOOK", 20000, 100);
+        Book book2 = createBook("JPA2 BOOK", 20000, 100, "김영한");
         em.persist(book2);
 
         OrderItem orderItem1 = OrderItem.createOrderItem(book1, 10000, 1);

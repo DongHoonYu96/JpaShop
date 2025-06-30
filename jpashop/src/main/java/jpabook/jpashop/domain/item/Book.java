@@ -13,8 +13,8 @@ import javax.persistence.Entity;
 @DiscriminatorValue("B")    //한테이블 전략(-) 구분X -> Discriminator로 구분
 @Getter
 @Setter
-@NoArgsConstructor
-public class Book extends Item{
+@NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
+public class Book extends Item {
     private String author;
     private String isbn;
 
@@ -23,6 +23,7 @@ public class Book extends Item{
         super(name, price, stockQuantity, discountPolicy);
         this.author = author;
         this.isbn = isbn;
+        this.setDiscountPolicy(discountPolicy);
     }
 
     public Book(String name, int price, int stockQuantity, String author, String isbn) {

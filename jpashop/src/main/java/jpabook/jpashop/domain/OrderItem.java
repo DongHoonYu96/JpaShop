@@ -33,7 +33,7 @@ public class OrderItem {
     @Convert(converter = MoneyConverter.class)
     @Column(name="price")
     private Money price;
-    
+
     @Column(name = "quantity")
     private int quantity;
 

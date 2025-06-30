@@ -42,14 +42,15 @@ public abstract class Item {
     @ManyToMany(mappedBy = "items")
     private List<Category> categories = new ArrayList<>();
 
-    @Transient
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "policy_id", nullable = false)
     private DiscountPolicy discountPolicy;
 
     protected Item(String name , int price, int stockQuantity, DiscountPolicy discountPolicy) {
         this.name=name;
         this.price=price;
         this.stockQuantity=stockQuantity;
-        this.discountPolicy= discountPolicy;
+        this.discountPolicy = discountPolicy;
     }
 
     protected Item(String name, int price, int stockQuantity) {

@@ -2,6 +2,7 @@ package jpabook.jpashop.service;
 
 import jpabook.jpashop.domain.item.Book;
 import jpabook.jpashop.domain.item.UploadFile;
+import jpabook.jpashop.domain.item.pricing.NoneDiscountPolicy;
 import jpabook.jpashop.repository.ItemRepository;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -76,10 +77,14 @@ public class ItemServiceTest {
     }
 
     private Book createItem() {
-        Book book = new Book();
-        book.setName("JPA");
-        book.setPrice(10000);
-        book.setStockQuantity(10);
+        Book book =  Book.builder()
+                .name("JPA")
+                .price(10000)
+                .stockQuantity(10)
+                .author("김영한")
+                .isbn("1234567890")
+                .discountPolicy(new NoneDiscountPolicy())
+                .build();
         em.persist(book);
         return book;
     }

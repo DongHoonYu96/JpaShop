@@ -8,9 +8,7 @@ import jpabook.jpashop.domain.item.pricing.PeriodCondition;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.time.DayOfWeek;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -39,12 +37,17 @@ class DiscountTest {
     @DisplayName("매주 금요일에는 AmountDiscountPolicy가 적용되어 상품의 가격에서 각각 1000원이 할인된다.")
     void createItem2() {
         //given
+        Clock fixed = Clock.fixed(
+                Instant.parse("2023-10-06T12:00:00Z"),
+                ZoneId.of("Asia/Seoul")
+        );
         Book book = new Book("Test Item", 10000, 10, "조영호", "오브젝트",
                 new AmountDiscountPolicy(Money.of(1000),
                     new PeriodCondition(
                         DayOfWeek.FRIDAY,
                         LocalTime.of(0, 0),
-                        LocalTime.of(23, 59)
+                        LocalTime.of(23, 59),
+                        fixed
                     )
         ));
 
@@ -67,12 +70,17 @@ class DiscountTest {
     @DisplayName("매주 목요일에는 PercentDiscountPolicy가 적용되어 상품의 가격에서 각각 30%씩 할인된다.")
     void createItem3() {
         //given
+        Clock fixed = Clock.fixed(
+                Instant.parse("2023-10-05T12:00:00Z"),
+                ZoneId.of("Asia/Seoul")
+        );
         Book book = new Book("Test Item", 10000, 10, "조영호", "오브젝트",
                 new PercentDiscountPolicy(0.3,
                         new PeriodCondition(
                                 DayOfWeek.THURSDAY,
                                 LocalTime.of(0, 0),
-                                LocalTime.of(23, 59)
+                                LocalTime.of(23, 59),
+                                fixed
                         )
                 ));
 

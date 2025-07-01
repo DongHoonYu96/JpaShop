@@ -71,6 +71,6 @@ public abstract class Item {
     }
 
     public Money calculateItemFee(Order order) {
-        return Money.of(price).minus(discountPolicy.calculateDiscountAmount(order, this));
+        return Money.of(price).minus(discountPolicy.calculateDiscountAmount(this));
     }
 }

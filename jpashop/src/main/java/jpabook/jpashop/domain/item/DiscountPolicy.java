@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -38,9 +39,9 @@ public abstract class DiscountPolicy {
         this.conditions = Arrays.asList(conditions);
     }
 
-    public Money calculateDiscountAmount(Order order, Item item) {
+    public Money calculateDiscountAmount(Item item) {
         for(DiscountCondition each : conditions) {
-            if (each.isSatisfiedBy(order)) {
+            if (each.isSatisfiedBy(item)) {
                 return getDiscountAmount(item);
             }
         }

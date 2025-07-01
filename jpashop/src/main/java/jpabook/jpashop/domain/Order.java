@@ -3,7 +3,6 @@ package jpabook.jpashop.domain;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import javax.management.Query;
 import javax.persistence.*;
 
 import jpabook.jpashop.domain.common.Money;

@@ -11,7 +11,7 @@ import javax.persistence.Entity;
 @Entity
 @Getter
 @DiscriminatorValue("NONE")
-@NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class NoneCondition extends DiscountCondition {
 
     @Override

@@ -9,10 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Transient;
-import java.time.Clock;
-import java.time.DayOfWeek;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
 
 @Entity
 @Getter
@@ -24,7 +21,7 @@ public class PeriodCondition extends DiscountCondition {
     private LocalTime endTime;
 
     @Transient
-    private Clock clock;
+    private Clock clock = Clock.system(ZoneId.of("Asia/Seoul"));
 
     public PeriodCondition(DayOfWeek dayOfWeek, LocalTime startTime, LocalTime endTime, Clock clock) {
         if (startTime.isAfter(endTime)) {
@@ -43,7 +40,7 @@ public class PeriodCondition extends DiscountCondition {
         this.dayOfWeek = dayOfWeek;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.clock = Clock.systemDefaultZone();
+        this.clock = Clock.system(ZoneId.of("Asia/Seoul"));
     }
 
     @Override

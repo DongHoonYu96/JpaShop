@@ -68,9 +68,6 @@ public class ItemController {
         List<Item> items = itemService.findItems(itemId, pageSize);
         model.addAttribute("items", items);
         model.addAttribute("pageSize", pageSize);
-//        if(itemId == null){
-//            model.addAttribute("lastItemId", 10);
-//        }
         model.addAttribute("lastItemId", items.isEmpty() ? 10 : items.get(items.size() - 1).getId());
 
         return "items/itemList";

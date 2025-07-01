@@ -55,7 +55,7 @@ public class OrderItem {
 
     //==조회 로직==//
     public Money calculateAmounts() {
-        Money money = item.calculateItemFee(order);
+        Money money = item.calculateItemFee();
         return money.multiply(quantity);
     }
 }

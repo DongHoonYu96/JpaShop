@@ -32,7 +32,25 @@
           </span>
         </td>
         <td th:text="${item.name}"></td>
-        <td th:text="${item.price}"></td>
+        <td>
+          <!-- 할인 없는 경우 -->
+          <span th:unless="${item.discounted}"
+                th:text="|가격 : ${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')}원|">
+          </span>
+
+          <!-- 할인 있는 경우 -->
+          <span th:if="${item.discounted}">
+            <!-- 원가에 줄긋기 -->
+            <span style="text-decoration: line-through; color: #6c757d;"
+                  th:text="|가격 : ${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')}원|">
+            </span>
+            &nbsp;
+            <!-- 할인된 가격 강조 -->
+            <span class="text-danger fw-bold"
+                  th:text="|${#numbers.formatDecimal(item.discountedPrice.value, 0, 'COMMA', 0, 'POINT')}원|">
+            </span>
+          </span>
+        </td>
         <td th:text="${item.stockQuantity}"></td>
         <td>
           <a href="#" th:href="@{/items/{id}/edit (id=${item.id})}"

@@ -52,4 +52,8 @@ public class Money {
     public int hashCode() {
         return Objects.hash(value);
     }
+
+    public boolean isLessThan(Money other) {
+        return this.value < other.value;
+    }
 }

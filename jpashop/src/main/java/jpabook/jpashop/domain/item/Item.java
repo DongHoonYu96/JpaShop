@@ -57,6 +57,15 @@ public abstract class Item {
         this(name, price, stockQuantity, new NoneDiscountPolicy());
     }
 
+    @Transient
+    public Money getDiscountedPrice() {
+        return calculateItemFee();
+    }
+
+    public boolean isDiscounted() {
+        return calculateItemFee().isLessThan(Money.of(price));
+    }
+
     //==비즈니스 로직==//
     public void addStock(int quantity){
         this.stockQuantity+=quantity;
@@ -70,7 +79,7 @@ public abstract class Item {
         this.stockQuantity=restStock;
     }
 
-    public Money calculateItemFee(Order order) {
+    public Money calculateItemFee() {
         return Money.of(price).minus(discountPolicy.calculateDiscountAmount(this));
     }
 }

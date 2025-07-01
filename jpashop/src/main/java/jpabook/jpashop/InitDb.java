@@ -8,11 +8,10 @@ import jpabook.jpashop.domain.Delivery;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderItem;
+import jpabook.jpashop.domain.common.Money;
 import jpabook.jpashop.domain.item.Book;
 import jpabook.jpashop.domain.item.UploadFile;
-import jpabook.jpashop.domain.item.pricing.NoneDiscountPolicy;
-import jpabook.jpashop.domain.item.pricing.PercentDiscountPolicy;
-import jpabook.jpashop.domain.item.pricing.PeriodCondition;
+import jpabook.jpashop.domain.item.pricing.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -104,16 +103,23 @@ public class InitDb {
         }
 
         public void dbInit4() {
-            Book book = new Book("Test Item", 10000, 10, "조영호", "오브젝트",
+            Book book = new Book("오브젝트", 30000, 10, "조영호", "123456",
                     new PercentDiscountPolicy(0.3,
+                            new NoneCondition()
+                    ));
+            book.getImages().add(new UploadFile("object.png", "object.png"));
+            em.persist(book);
+
+            Book book2 = new Book("스프링 시큐리티 인 액션", 30000, 100, "로렌티우 스필카", "123456",
+                    new AmountDiscountPolicy(Money.of(2000),
                             new PeriodCondition(
-                                    DayOfWeek.THURSDAY,
+                                    DayOfWeek.WEDNESDAY,
                                     LocalTime.of(0, 0),
                                     LocalTime.of(23, 59)
                             )
                     ));
-            book.getImages().add(new UploadFile("object.png", "object.png"));
-            em.persist(book);
+            book2.getImages().add(new UploadFile("security.png", "security.png"));
+            em.persist(book2);
         }
 
         public static Member createMember(String loginId, String password, String name, String city, String street, String zipcode) {

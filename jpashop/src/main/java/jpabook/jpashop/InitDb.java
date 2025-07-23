@@ -120,6 +120,18 @@ public class InitDb {
                     ));
             book2.getImages().add(new UploadFile("security.png", "security.png"));
             em.persist(book2);
+
+            Book book3 = new Book("Real MySQL 8.0 (1권)", 30000, 100, "백은빈, 이성욱", "456789",
+                    new OverlappedDiscountPolicy(
+                            new AmountDiscountPolicy(Money.of(1000),
+                                    new NoneCondition()
+                            ),
+                            new PercentDiscountPolicy(0.3,
+                                    new NoneCondition()
+                            )
+                    ));
+            book3.getImages().add(new UploadFile("realmysql.png", "realmysql.png"));
+            em.persist(book3);
         }
 
         public static Member createMember(String loginId, String password, String name, String city, String street, String zipcode) {

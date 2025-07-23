@@ -2,9 +2,7 @@ package jpabook.jpashop.domain.item;
 
 import jpabook.jpashop.domain.*;
 import jpabook.jpashop.domain.common.Money;
-import jpabook.jpashop.domain.item.pricing.AmountDiscountPolicy;
-import jpabook.jpashop.domain.item.pricing.PercentDiscountPolicy;
-import jpabook.jpashop.domain.item.pricing.PeriodCondition;
+import jpabook.jpashop.domain.item.pricing.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -130,5 +128,33 @@ class DiscountTest {
         //then
         assertEquals(Money.of(9000), discountMoney);
         assertEquals(Money.of(27000), order.getTotalPrice()); // (10000 - 1000) * 3
+    }
+
+    @Test
+    @DisplayName("중복할인 정책이 적용되어 상품의 가격에서 각각 1000원이 할인되고, 원가의 30%가 추가 할인된다.")
+    void createItem5() {
+        //given
+        Book book = new Book("Test Item", 10000, 10, "조영호", "오브젝트",
+                new OverlappedDiscountPolicy(
+                        new AmountDiscountPolicy(Money.of(1000),
+                                new NoneCondition()
+                        ),
+                        new PercentDiscountPolicy(0.3,
+                                new NoneCondition()
+                        )
+                ));
+
+        Member member = new Member("testUser", new Address("Test City", "Test Street", "12345"), "id", "password");
+        Delivery delivery = new Delivery();
+        delivery.setAddress(member.getAddress());
+        OrderItem orderItem=OrderItem.createOrderItem(book,book.getPrice(),3);
+        Order order=Order.createOrder(member,delivery,orderItem);
+
+        //when
+        Money discountMoney = book.calculateItemFee();
+
+        //then
+        assertEquals(Money.of(6000), discountMoney);
+        assertEquals(Money.of(18000), order.getTotalPrice());
     }
 }

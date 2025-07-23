@@ -1,7 +1,6 @@
 package jpabook.jpashop.domain.item;
 
 import jpabook.jpashop.domain.Category;
-import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.common.Money;
 import jpabook.jpashop.domain.item.pricing.NoneDiscountPolicy;
 import jpabook.jpashop.exception.NotEnoughStockException;

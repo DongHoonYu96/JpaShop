@@ -127,7 +127,7 @@ public class StockService {
 
     private double calculateMA(List<Double> prices, int period) {
         return prices.stream().limit(period).mapToDouble(Double::doubleValue).average().orElse(0.0);
-    }
+    } //
 
     private void checkAndNotify(Stock stock, double currentPrice, double movingAverage, int period) {
         if (Math.abs(currentPrice - movingAverage) / movingAverage < 0.01) { // 1% 이내로 근접하면 알림

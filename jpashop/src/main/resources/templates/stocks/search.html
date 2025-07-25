@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="fragments/header :: header" />
+  <body>
+    <div class="container">
+      <div th:replace="fragments/bodyHeader :: bodyHeader" />
+
+      <form th:action="@{/stocks/search}" method="post">
+        <div class="form-group">
+          <label for="keyword">종목명/심볼 검색</label>
+          <input
+            type="text"
+            id="keyword"
+            name="keyword"
+            class="form-control"
+            placeholder="검색어를 입력하세요"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">검색</button>
+      </form>
+      <br />
+
+      <div th:if="${stocks != null}">
+        <h2>검색 결과</h2>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>종목코드</th>
+              <th>종목명</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="stock : ${stocks}">
+              <td th:text="${stock.symbol}"></td>
+              <td th:text="${stock.name}"></td>
+              <td>
+                <form
+                  th:action="@{/stocks/subscribe/{symbol}(symbol=${stock.symbol})}"
+                  method="post"
+                >
+                  <input type="hidden" name="name" th:value="${stock.name}" />
+                  <button type="submit" class="btn btn-primary">구독</button>
+                </form>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div th:replace="fragments/footer :: footer" />
+    </div>
+    <!-- /container -->
+  </body>
+</html>

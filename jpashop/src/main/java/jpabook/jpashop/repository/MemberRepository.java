@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -20,8 +21,7 @@ public class MemberRepository {
     }
 
     public Member findOne(Long id){
-        Member member = em.find(Member.class, id);
-        return member;
+        return em.find(Member.class, id);
     }
 
     public List<Member> findAll(){
@@ -38,5 +38,10 @@ public class MemberRepository {
         return em.createQuery("select m from Member m where m.name= :name",Member.class)    //:name 은 파라미터바인딩
                 .setParameter("name",name)
                 .getResultList();
+    }
+
+    public Optional<Member> findById(Long memberId) {
+        Member member = em.find(Member.class, memberId);
+        return Optional.ofNullable(member);
     }
 }

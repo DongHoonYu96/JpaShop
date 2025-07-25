@@ -17,7 +17,7 @@ class DiscountTest {
     void createItem() {
         //given
         Book book = new Book("오브젝트", 10000, 10, "조영호", "123456");
-        Member member = new Member("testUser", new Address("Test City", "Test Street", "12345"), "id", "password");
+        Member member = new Member("testUser", new Address("Test City", "Test Street", "12345"), "id", "password","");
         Delivery delivery = new Delivery();
         delivery.setAddress(member.getAddress());
         OrderItem orderItem=OrderItem.createOrderItem(book,book.getPrice(),3);
@@ -49,7 +49,7 @@ class DiscountTest {
                     )
         ));
 
-        Member member = new Member("testUser", new Address("Test City", "Test Street", "12345"), "id", "password");
+        Member member = new Member("testUser", new Address("Test City", "Test Street", "12345"), "id", "password", "");
         Delivery delivery = new Delivery();
         delivery.setAddress(member.getAddress());
         OrderItem orderItem=OrderItem.createOrderItem(book,book.getPrice(),3);
@@ -82,7 +82,7 @@ class DiscountTest {
                         )
                 ));
 
-        Member member = new Member("testUser", new Address("Test City", "Test Street", "12345"), "id", "password");
+        Member member = new Member("testUser", new Address("Test City", "Test Street", "12345"), "id", "password", "");
         Delivery delivery = new Delivery();
         delivery.setAddress(member.getAddress());
         OrderItem orderItem=OrderItem.createOrderItem(book,book.getPrice(),3);
@@ -115,7 +115,7 @@ class DiscountTest {
                         )
                 ));
 
-        Member member = new Member("testUser", new Address("Test City", "Test Street", "12345"), "id", "password");
+        Member member = new Member("testUser", new Address("Test City", "Test Street", "12345"), "id", "password", "");
         Delivery delivery = new Delivery();
         delivery.setAddress(member.getAddress());
         OrderItem orderItem=OrderItem.createOrderItem(book,book.getPrice(),3);
@@ -144,7 +144,7 @@ class DiscountTest {
                         )
                 ));
 
-        Member member = new Member("testUser", new Address("Test City", "Test Street", "12345"), "id", "password");
+        Member member = new Member("testUser", new Address("Test City", "Test Street", "12345"), "id", "password", "");
         Delivery delivery = new Delivery();
         delivery.setAddress(member.getAddress());
         OrderItem orderItem=OrderItem.createOrderItem(book,book.getPrice(),3);

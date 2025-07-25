@@ -12,6 +12,7 @@ import jpabook.jpashop.domain.common.Money;
 import jpabook.jpashop.domain.item.Book;
 import jpabook.jpashop.domain.item.UploadFile;
 import jpabook.jpashop.domain.item.pricing.*;
+import jpabook.jpashop.service.stock.StockService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -41,6 +42,7 @@ public class InitDb {
     public static class InitService {
 
         private final EntityManager em;
+        private final StockService stockService;
 
         public void dbInit1() {
             Member member = createMember("bisu", "123456", "userA", "서울", "1", "1111");
@@ -100,6 +102,7 @@ public class InitDb {
         public void dbInit3() {
             Member member = createMember("admin", "admin!", "admin", "진주", "2", "2222");
             em.persist(member);
+            stockService.subscribe(member.getId(), "QQQ", "	Invesco QQQ Trust Series 1");
         }
 
         public void dbInit4() {
@@ -144,5 +147,3 @@ public class InitDb {
         }
     }
 }
-
-

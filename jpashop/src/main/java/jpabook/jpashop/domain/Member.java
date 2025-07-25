@@ -8,6 +8,7 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import jpabook.jpashop.domain.stock.Subscription;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
@@ -33,6 +34,8 @@ public class Member {
     @NotNull
     private String name;
 
+    private String email;
+
     @Embedded
     private Address address;
 
@@ -40,12 +43,17 @@ public class Member {
     @JsonIgnore
     private List<Order> orders = new ArrayList<>();
 
+    @OneToMany(mappedBy = "member")
+    @JsonIgnore
+    private List<Subscription> subscriptions = new ArrayList<>();
+
     @Builder
-    public Member(String name, Address address, String loginId, String password) {
+    public Member(String name, Address address, String loginId, String password, String email) {
         this.name = name;
         this.address = address;
         this.loginId = loginId;
         this.password = password;
+        this.email = email;
     }
 
     @Override
@@ -55,6 +63,7 @@ public class Member {
                 ", loginId='" + loginId + '\'' +
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
                 ", address=" + address +
                 '}';
     }

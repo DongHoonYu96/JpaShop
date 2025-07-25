@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="fragments/header :: header" />
+  <body>
+    <div class="container">
+      <div th:replace="fragments/bodyHeader :: bodyHeader" />
+      <div>
+        <h2>구독 목록</h2>
+        <div class="d-flex justify-content-end">
+          <a href="/stocks/search" class="btn btn-primary">주식 검색</a>
+        </div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>종목코드</th>
+              <th>종목명</th>
+              <th>현재가</th>
+              <th>20일선</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="stockPrice : ${stockPrices}">
+              <td th:text="${stockPrice.subscription.id}"></td>
+              <td th:text="${stockPrice.subscription.stock.symbol}"></td>
+              <td th:text="${stockPrice.subscription.stock.name}"></td>
+              <td th:text="${stockPrice.currentPrice}"></td>
+              <td th:text="${stockPrice.ma20}"></td>
+              <td>
+                <form
+                  th:action="@{/stocks/unsubscribe/{id}(id=${stockPrice.subscription.id})}"
+                  method="post"
+                >
+                  <button type="submit" class="btn btn-danger">구독 취소</button>
+                </form>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div th:replace="fragments/footer :: footer" />
+    </div>
+    <!-- /container -->
+  </body>
+</html>

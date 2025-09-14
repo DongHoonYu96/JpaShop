@@ -1,6 +1,6 @@
 # JAVA_Spring
 
-### MyJpaShop(3개월/개인프로젝트) Back - End
+### MyJpaShop(개인프로젝트)
 
 
 **담당**
